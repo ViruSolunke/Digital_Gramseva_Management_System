@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications | Gram Panchayat Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <nav class="bg-blue-900 text-white p-4 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-chart-line text-orange-400"></i>
+                <span class="font-bold uppercase tracking-tight">Citizen Dashboard</span>
+            </div>
+            <a href="index.html" class="text-sm bg-blue-800 px-4 py-1 rounded hover:bg-blue-700">Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-10 px-6">
+        
+        <div class="mb-8">
+           <div id="userProfile" class="hidden flex items-center gap-3 bg-slate-100 p-1 pr-4 rounded-full border border-slate-200 shadow-sm">
+                    <div id="userCircle" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black text-lg border-2 border-white shadow-sm">
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[9px] font-black text-slate-400 uppercase leading-none">Verified User</p>
+                        <p id="userNameDisplay" class="text-xs font-black text-slate-800 uppercase leading-tight">Guest</p>
+                    </div>
+            <p class="text-gray-500 italic text-sm">Track all your submitted applications and complaints below.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-yellow-500">
+                <p class="text-xs font-bold text-gray-400 uppercase">Pending</p>
+                <h3 class="text-2xl font-black text-gray-800">02</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                <p class="text-xs font-bold text-gray-400 uppercase">Approved</p>
+                <h3 class="text-2xl font-black text-gray-800">05</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
+                <p class="text-xs font-bold text-gray-400 uppercase">Rejected</p>
+                <h3 class="text-2xl font-black text-gray-800">01</h3>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border">
+            <div class="p-6 bg-gray-50 border-b flex justify-between items-center">
+                <h3 class="font-bold text-gray-700 uppercase"><i class="fas fa-list mr-2"></i> Recent Applications</h3>
+                <button class="text-blue-600 text-sm font-bold hover:underline">Filter by Date</button>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-100 text-gray-600 uppercase text-xs font-bold">
+                        <tr>
+                            <th class="px-6 py-4">ID</th>
+                            <th class="px-6 py-4">Service Name</th>
+                            <th class="px-6 py-4">Date Applied</th>
+                            <th class="px-6 py-4">Status</th>
+                            <th class="px-6 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y text-sm">
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-bold text-blue-900">#GP98231</td>
+                            <td class="px-6 py-4 font-medium">Birth Certificate</td>
+                            <td class="px-6 py-4 text-gray-500">Jan 02, 2026</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Pending</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="status.html" class="text-blue-600 hover:underline font-bold text-xs">View Tracking</a>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-bold text-blue-900">#GP97104</td>
+                            <td class="px-6 py-4 font-medium">Ration Card Update</td>
+                            <td class="px-6 py-4 text-gray-500">Dec 20, 2025</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Approved</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700"><i class="fas fa-download mr-1"></i> Certificate</button>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-bold text-blue-900">#GP96052</td>
+                            <td class="px-6 py-4 font-medium">Complaint: Water Leakage</td>
+                            <td class="px-6 py-4 text-gray-500">Dec 15, 2025</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Rejected</span>
+                            </td>
+                            <td class="px-6 py-4 text-gray-400">
+                                <span class="text-xs italic">Incorrect Ward No.</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-bold text-blue-900">#GP95880</td>
+                            <td class="px-6 py-4 font-medium">Solar Panel Scheme</td>
+                            <td class="px-6 py-4 text-gray-500">Dec 10, 2025</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">In Progress</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="status.html" class="text-blue-600 hover:underline font-bold text-xs">Track Status</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-10 bg-blue-50 p-6 rounded-2xl border-2 border-dashed border-blue-200 text-center">
+            <p class="text-sm text-blue-700">
+                <i class="fas fa-info-circle mr-2"></i> Agar aapki application 7 din se zyada pending hai, toh kripya <strong>Gram Sevak</strong> se sampark karein.
+            </p>
+        </div>
+    </main>
+
+</body>
+</html>
+<script>
+ 
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    // Login ke time jo name save hua hai usko read karo
+    const savedName = sessionStorage.getItem("userName");
+
+    const userProfile = document.getElementById("userProfile");
+    const userNameDisplay = document.getElementById("userNameDisplay");
+    const userCircle = document.getElementById("userCircle");
+
+    if(savedName){
+
+        // Profile section show karo
+        userProfile.classList.remove("hidden");
+
+        // User name show karo
+        userNameDisplay.textContent = savedName;
+
+        // Circle me first letter show karo
+        userCircle.textContent = savedName.charAt(0).toUpperCase();
+
+    }
+
+});
+
+
+const protectedBtns = document.querySelectorAll("a[href]");
+
+protectedBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+
+        const savedName = sessionStorage.getItem('userName');
+
+        if (!savedName) {
+            e.preventDefault();
+            alert("Please login first to access this service!");
+
+            sessionStorage.setItem('redirectAfterLogin', btn.getAttribute('href'));
+
+            window.location.href = "logIn.html";
+        }
+
+    })
+});
+
+</script>

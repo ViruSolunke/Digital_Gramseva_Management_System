@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisan Seva Portal | Digital Agriculture Transformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gov-green: #064e3b; --gov-gold: #d4af37; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #f4f7f2;
+            background-image: radial-gradient(#166534 0.6px, transparent 0.6px);
+            background-size: 32px 32px;
+            color: #1e293b;
+        }
+        .main-container { max-width: 1400px; margin: 0 auto; }
+        .glass-header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 2px solid #e2e8f0; }
+        .agri-card { 
+            background: white; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 2.5rem; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .agri-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(22, 101, 52, 0.12); border-color: #166534; }
+        .tab-active { background: #166534 !important; color: white !important; transform: scale(1.05); shadow: 0 10px 15px rgba(22, 101, 52, 0.2); }
+        .hero-gradient { background: linear-gradient(135deg, #064e3b 0%, #14532d 100%); position: relative; overflow: hidden; }
+        .hero-gradient::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); opacity: 0.05; }
+        .mandi-row:nth-child(even) { background-color: #f9fdfa; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <div class="bg-[#042f1a] text-white py-3 px-8 flex justify-between items-center text-[11px] font-extrabold tracking-[0.2em] uppercase">
+        <div class="flex items-center gap-6">
+            <span class="flex items-center gap-2"><img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-4 invert"> GOVERNMENT OF INDIA</span>
+            <span class="hidden md:inline-block opacity-60">Ministry of Agriculture & Farmers Welfare</span>
+        </div>
+        <div class="flex gap-6 items-center">
+            <span class="text-yellow-400">HELPLINE: 1800-180-1551</span>
+            <div class="flex gap-2">
+                <button class="hover:text-yellow-400 transition">A+</button>
+                <button class="hover:text-yellow-400 transition">A-</button>
+                <span class="ml-4 bg-white/10 px-3 py-0.5 rounded">हिन्दी</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="glass-header sticky top-0 z-50">
+        <div class="main-container px-8 h-24 flex justify-between items-center">
+            <div class="flex items-center gap-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-14">
+                <div class="border-l-2 border-slate-200 pl-5">
+                    <h1 class="text-2xl font-black text-green-900 tracking-tighter leading-none">KISAN SEVA PORTAL</h1>
+                    <p class="text-xs font-bold text-orange-600 uppercase tracking-widest mt-1">Unified Digital Agricultural Interface</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <div class="hidden lg:flex bg-slate-100 p-2 rounded-2xl gap-2 shadow-inner">
+                    <button onclick="showPage('dash')" id="tab-dash" class="px-8 py-3 text-sm font-black uppercase tracking-wider transition-all rounded-xl tab-active">Dashboard</button>
+                    <button onclick="showPage('market')" id="tab-market" class="px-8 py-3 text-sm font-black uppercase tracking-wider transition-all rounded-xl text-slate-500">Mandi Rates</button>
+                    <button onclick="showPage('info')" id="tab-info" class="px-8 py-3 text-sm font-black uppercase tracking-wider transition-all rounded-xl text-slate-500">Knowledge Hub</button>
+                </div>
+                <a href="index.html" class="flex items-center gap-3 bg-blue-900 text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-blue-800 transition-all shadow-xl hover:shadow-blue-900/20 active:scale-95">
+                    <i class="fas fa-home text-sm"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container px-8 mt-10">
+
+        <div id="page-dash" class="space-y-10 animate-fade-in">
+            <div class="hero-gradient rounded-[3.5rem] p-12 text-white shadow-2xl flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="max-w-2xl">
+                    <span class="bg-yellow-500 text-green-950 px-5 py-1.5 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block">Official Update 2026</span>
+                    <h2 class="text-5xl font-black tracking-tighter mb-6 leading-tight">Empowering Bharat's Annadata Digitally.</h2>
+                    <p class="text-lg font-medium text-green-100 opacity-90 leading-relaxed mb-8">Access PM-Kisan status, Soil Health Cards, and customized Crop Advisories based on your local weather and soil conditions.</p>
+                    <div class="flex flex-wrap gap-4 font-inter">
+                        <div class="bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-3xl w-48">
+                            <p class="text-[10px] font-black uppercase opacity-60 mb-1">Last Installment</p>
+                            <p class="text-xl font-extrabold text-yellow-400">₹2,000 Paid</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-3xl w-48">
+                            <p class="text-[10px] font-black uppercase opacity-60 mb-1">Land Records</p>
+                            <p class="text-xl font-extrabold">03 Plots Linked</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="w-64 h-64 bg-white/10 rounded-full flex items-center justify-center border-4 border-dashed border-white/20 animate-[spin_20s_linear_infinite]">
+                        <i class="fas fa-cog text-8xl opacity-10"></i>
+                    </div>
+                    <i class="fas fa-user-check text-9xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-yellow-400 shadow-2xl"></i>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="agri-card p-8 border-l-8 border-l-blue-500">
+                    <div class="flex justify-between items-start mb-6">
+                        <h4 class="text-sm font-black text-slate-400 uppercase tracking-widest">Local Weather</h4>
+                        <i class="fas fa-sun text-orange-400 text-2xl"></i>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-5xl font-black text-slate-800 tracking-tighter">29°C</span>
+                        <div class="text-xs font-bold text-slate-500">
+                            <p>Humidity: 32%</p>
+                            <p>Wind: 12km/h</p>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-sm font-bold text-blue-700 bg-blue-50 p-3 rounded-xl border border-blue-100">Ideal for sowing Mustard and Barley today.</p>
+                </div>
+
+                <div class="agri-card p-8 border-l-8 border-l-green-600">
+                    <h4 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6">KCC Limit Status</h4>
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">
+                            <span class="text-xs font-black text-green-700 uppercase">Limit Used: 65%</span>
+                            <span class="text-xs font-black text-slate-400">₹3.5L / ₹5L</span>
+                        </div>
+                        <div class="overflow-hidden h-3 mb-4 text-xs flex rounded-full bg-green-100">
+                            <div style="width:65%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-600"></div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] font-bold text-slate-400 uppercase">Next Review: 15 March 2026</p>
+                </div>
+
+                <div class="agri-card p-8 border-l-8 border-l-orange-500">
+                    <h4 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6">Market Watch</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-bold">Wheat</span>
+                            <span class="text-sm font-black text-green-600">₹2,450 <i class="fas fa-arrow-up text-[10px]"></i></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-bold">Soybean</span>
+                            <span class="text-sm font-black text-red-600">₹4,120 <i class="fas fa-arrow-down text-[10px]"></i></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-bold">Cotton</span>
+                            <span class="text-sm font-black text-green-600">₹7,800 <i class="fas fa-arrow-up text-[10px]"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="agri-card p-8 border-l-8 border-l-purple-600">
+                    <h4 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-4">Soil Health</h4>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-700 font-black">N-P-K</div>
+                        <p class="text-xs font-bold text-slate-600 italic">Nitrogen levels are low in Plot A-12.</p>
+                    </div>
+                    <button class="w-full py-3 bg-purple-50 text-purple-700 rounded-xl text-[10px] font-black uppercase tracking-widest border border-purple-200 hover:bg-purple-700 hover:text-white transition-all">Download Full Report</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-market" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-[3rem] shadow-2xl border border-slate-200 overflow-hidden">
+                <div class="agri-gradient p-10 text-white flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div>
+                        <h3 class="text-3xl font-black tracking-tighter uppercase leading-none">Market Intelligence Hub</h3>
+                        <p class="text-green-100 text-sm font-bold mt-2 opacity-80">Real-time data synced with e-NAM & Regional Agricultural Produce Markets</p>
+                    </div>
+                    <div class="relative w-full md:w-96">
+                        <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-green-800"></i>
+                        <input type="text" id="mandiSearch" onkeyup="filterMandi()" placeholder="Search Crop or Mandi..." class="w-full pl-14 pr-6 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder:text-white/60 focus:outline-none focus:bg-white focus:text-green-900 transition-all font-bold">
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="mandiTable">
+                        <thead>
+                            <tr class="bg-slate-50 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] border-b">
+                                <th class="p-8">Commodity</th>
+                                <th class="p-8">Mandi Location</th>
+                                <th class="p-8">Variety</th>
+                                <th class="p-8">Min Price</th>
+                                <th class="p-8">Max Price (MSP)</th>
+                                <th class="p-8">Market Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-bold text-slate-700 divide-y divide-slate-100">
+                            <tr class="mandi-row hover:bg-green-50 transition-all">
+                                <td class="p-8 font-black text-green-900">Wheat (Gehun)</td>
+                                <td class="p-8">Indore Mandi</td>
+                                <td class="p-8">Sharbati</td>
+                                <td class="p-8 font-inter">₹2,340</td>
+                                <td class="p-8 font-black text-green-600 font-inter">₹2,850</td>
+                                <td class="p-8"><span class="bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-[10px] uppercase font-black">Bullish <i class="fas fa-arrow-up"></i></span></td>
+                            </tr>
+                            <tr class="mandi-row hover:bg-green-50 transition-all">
+                                <td class="p-8 font-black text-green-900">Cotton (Kapaas)</td>
+                                <td class="p-8">Rajkot Mandi</td>
+                                <td class="p-8">Long Staple</td>
+                                <td class="p-8 font-inter">₹7,200</td>
+                                <td class="p-8 font-black text-green-600 font-inter">₹8,100</td>
+                                <td class="p-8"><span class="bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-[10px] uppercase font-black">Bullish <i class="fas fa-arrow-up"></i></span></td>
+                            </tr>
+                            <tr class="mandi-row hover:bg-green-50 transition-all">
+                                <td class="p-8 font-black text-green-900">Onion (Pyaz)</td>
+                                <td class="p-8">Lasalgaon Mandi</td>
+                                <td class="p-8">Red Nasik</td>
+                                <td class="p-8 font-inter">₹1,200</td>
+                                <td class="p-8 font-black text-red-600 font-inter">₹1,650</td>
+                                <td class="p-8"><span class="bg-red-100 text-red-700 px-4 py-1.5 rounded-full text-[10px] uppercase font-black">Bearish <i class="fas fa-arrow-down"></i></span></td>
+                            </tr>
+                            <tr class="mandi-row hover:bg-green-50 transition-all">
+                                <td class="p-8 font-black text-green-900">Soybean</td>
+                                <td class="p-8">Kota Mandi</td>
+                                <td class="p-8">Yellow-33</td>
+                                <td class="p-8 font-inter">₹4,050</td>
+                                <td class="p-8 font-black text-green-600 font-inter">₹4,400</td>
+                                <td class="p-8"><span class="bg-slate-100 text-slate-700 px-4 py-1.5 rounded-full text-[10px] uppercase font-black">Stable <i class="fas fa-minus"></i></span></td>
+                            </tr>
+                            <tr class="mandi-row hover:bg-green-50 transition-all">
+                                <td class="p-8 font-black text-green-900">Mustard</td>
+                                <td class="p-8">Alwar Mandi</td>
+                                <td class="p-8">Black-8%</td>
+                                <td class="p-8 font-inter">₹5,100</td>
+                                <td class="p-8 font-black text-green-600 font-inter">₹5,450</td>
+                                <td class="p-8"><span class="bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-[10px] uppercase font-black">Bullish <i class="fas fa-arrow-up"></i></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-info" class="hidden space-y-8 animate-fade-in">
+            <h2 class="text-4xl font-black text-slate-800 tracking-tighter uppercase mb-10">Agri-Advisory & Schemes</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="agri-card p-10 bg-gradient-to-br from-white to-green-50">
+                    <div class="w-20 h-20 bg-green-600 text-white rounded-3xl flex items-center justify-center text-3xl shadow-xl shadow-green-900/20 mb-8">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-800 uppercase mb-4">Farm Mechanization Subsidy</h3>
+                    <p class="text-lg font-medium text-slate-600 leading-relaxed mb-8">Central Government provides 40% to 50% financial assistance for purchasing Tractors, Power Tillers, and Harvesters under the SMAM scheme. Registration is now open for Q1 2026.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-bold text-slate-700"><i class="fas fa-check-circle text-green-600"></i> Max Subsidy: ₹5,00,000</li>
+                        <li class="flex items-center gap-3 text-sm font-bold text-slate-700"><i class="fas fa-check-circle text-green-600"></i> Required: Aadhaar & Land Record</li>
+                        <li class="flex items-center gap-3 text-sm font-bold text-slate-700"><i class="fas fa-check-circle text-green-600"></i> Processing Time: 15 Working Days</li>
+                    </ul>
+                    <button class="bg-green-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-green-800 transition shadow-lg">View Scheme Details</button>
+                </div>
+                <div class="agri-card p-10 bg-gradient-to-br from-white to-orange-50">
+                    <div class="w-20 h-20 bg-orange-500 text-white rounded-3xl flex items-center justify-center text-3xl shadow-xl shadow-orange-900/20 mb-8">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-800 uppercase mb-4">Integrated Pest Management</h3>
+                    <p class="text-lg font-medium text-slate-600 leading-relaxed mb-8">Early detection of 'Pink Bollworm' in Cotton crops reported in South regions. Use Pheromone traps and avoid excessive Nitrogen application to mitigate risk.</p>
+                    <div class="p-6 bg-white rounded-3xl border border-orange-100 italic text-sm text-slate-500">
+                        "Emergency Support: Call 1800-419-8800 for expert crop surgery advice within 2 hours."
+                    </div>
+                    <button class="mt-8 bg-orange-600 text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-500 transition shadow-lg">Open Pest Control Guide</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="mt-32 bg-[#021f11] text-white pt-20 pb-10 px-10">
+        <div class="main-container grid md:grid-cols-4 gap-16 mb-20">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-4 mb-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-16 invert">
+                    <div>
+                        <h4 class="text-2xl font-black leading-none">DIGITAL KISAN BHARAT</h4>
+                        <p class="text-[10px] font-bold text-green-400 uppercase tracking-widest mt-2">National Informatics Center Support</p>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-lg leading-relaxed max-w-lg font-medium italic">"The future of Indian agriculture lies in the synchronization of soil, seed, and data. Our mission is to make every farmer a 'Smart Farmer'."</p>
+            </div>
+            <div>
+                <h5 class="font-black text-xs uppercase tracking-[0.2em] mb-8 text-yellow-500">Essential Portals</h5>
+                <ul class="space-y-4 text-sm font-bold text-slate-300 uppercase tracking-wider">
+                    <li class="hover:text-white transition cursor-pointer">PM-Kisan Dashboard</li>
+                    <li class="hover:text-white transition cursor-pointer">e-NAM Mandi</li>
+                    <li class="hover:text-white transition cursor-pointer">Fasal Bima Portal</li>
+                    <li class="hover:text-white transition cursor-pointer">Kisan Call Center</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-black text-xs uppercase tracking-[0.2em] mb-8 text-yellow-500">Contact Desk</h5>
+                <div class="space-y-4">
+                    <p class="text-2xl font-black text-white">1800-11-1551</p>
+                    <p class="text-sm text-slate-400">helpdesk-agri@gov.in</p>
+                    <p class="text-xs text-slate-500 leading-relaxed mt-4">Krishi Bhawan, Dr. Rajendra Prasad Road, New Delhi - 110001</p>
+                </div>
+            </div>
+        </div>
+        <div class="main-container border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-500">
+            <p>© 2026 Department of Agriculture & Farmers Welfare. All Rights Reserved.</p>
+            <div class="flex gap-8 mt-6 md:mt-0">
+                <span>Privacy Policy</span>
+                <span>Terms of Service</span>
+                <span>Security Audit</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Page Switching Engine
+        function showPage(pageId) {
+            // Hide all pages with a fade out effect
+            const pages = ['dash', 'market', 'info'];
+            pages.forEach(p => {
+                const element = document.getElementById('page-' + p);
+                element.style.display = 'none';
+                document.getElementById('tab-' + p).classList.remove('tab-active');
+                document.getElementById('tab-' + p).classList.add('text-slate-500');
+            });
+
+            // Show selected page
+            const activePage = document.getElementById('page-' + pageId);
+            activePage.style.display = 'block';
+            
+            // Highlight Tab
+            const activeTab = document.getElementById('tab-' + pageId);
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('text-slate-500');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Live Mandi Search Filter
+        function filterMandi() {
+            let input = document.getElementById("mandiSearch");
+            let filter = input.value.toUpperCase();
+            let tr = document.getElementById("mandiTable").getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let text = tr[i].innerText.toUpperCase();
+                tr[i].style.display = text.indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Report | Gram Panchayat Irup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        /* The exact blue ribbon from your image */
+        .ribbon {
+            clip-path: polygon(100% 0, 100% 100%, 50% 85%, 0 100%, 0 0);
+            width: 28px; height: 40px;
+            background-color: #1e40af;
+        }
+
+        /* Gradient summary boxes */
+        .box-blue { background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); }
+        .box-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .box-orange { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        
+        .progress-bg { background-color: #f1f5f9; height: 8px; border-radius: 999px; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-white py-6 px-10 flex justify-between items-center border-b">
+        <div class="flex items-center gap-5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-16">
+            <div>
+                <h1 class="text-2xl font-black text-slate-900 uppercase tracking-tight leading-none">Gram Panychhat Irup</h1>
+                <h2 class="text-3xl font-black text-slate-900 uppercase">Development Report</h2>
+                <p class="text-orange-500 font-bold text-sm">Financial Year 2024-2026</p>
+            </div>
+        </div>
+        <button class="bg-[#1e3a8a] text-white px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2">
+            <i class="fas fa-undo-alt"></i> <a href="index.html">Back to Home</a>
+        </button>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="box-blue p-8 rounded-[2rem] text-white shadow-xl text-center">
+                <p class="text-xs font-bold opacity-90 uppercase mb-2">Total Estimated Budget</p>
+                <h3 class="text-4xl font-black">₹85.4 Lakh</h3>
+            </div>
+            <div class="box-green p-8 rounded-[2rem] text-white shadow-xl text-center">
+                <p class="text-xs font-bold opacity-90 uppercase mb-2">Total Expenditure</p>
+                <h3 class="text-4xl font-black">₹62.1 Lakh</h3>
+            </div>
+            <div class="box-orange p-8 rounded-[2rem] text-white shadow-xl text-center">
+                <p class="text-xs font-bold opacity-90 uppercase mb-2">Verification Status</p>
+                <h3 class="text-4xl font-black">Verified</h3>
+            </div>
+        </div>
+
+        <h2 class="text-5xl font-black text-[#1e3a8a] mb-12">Detailed Work Progress</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <script>
+                const projects = [
+                    { id: "01", title: "Main Road Concreting (Ward 2)", status: "Completed", statusColor: "bg-orange-500", scheme: "PMGSY - Pradhan Mantri Gram Sadak Yojana", date: "12/03/2024", cost: "₹11,50,000", progress: "100", note: "Work complied under market cost savings." },
+                    { id: "02", title: "Primary School Digital Lab", status: "Ongoing", statusColor: "bg-orange-500", scheme: "Digital India Initiative", date: "05/02/2024", cost: "₹8,20,000", progress: "65", note: "Hardware installation in progress." },
+                    { id: "03", title: "RO Water Plant Installation", status: "Completed", statusColor: "bg-green-600", scheme: "Jal Jeevan Mission", date: "15/05/2024", cost: "₹5,90,000", progress: "100", note: "Fully operational for ward 1-4." },
+                    { id: "04", title: "100 Solar Street Lights", status: "Completed", statusColor: "bg-green-600", scheme: "Gram Urja Abhiyan", date: "20/06/2024", cost: "₹4,50,000", progress: "100", note: "Installed at all main junctions." },
+                    { id: "05", title: "Public Toilet Block (Market)", status: "Completed", statusColor: "bg-green-600", scheme: "Swachh Bharat Abhiyan", date: "10/07/2024", cost: "₹3,20,000", progress: "100", note: "Inspected and verified." },
+                    { id: "06", title: "Health Center Repairing", status: "Ongoing", statusColor: "bg-orange-500", scheme: "National Health Mission", date: "12/08/2024", cost: "₹2,80,000", progress: "45", note: "Roof tiling work in progress." },
+                    { id: "07", title: "Irrigation Canal Cleaning", status: "Completed", statusColor: "bg-green-600", scheme: "MGNREGA Scheme", date: "01/09/2024", cost: "₹1,50,000", progress: "100", note: "Completed before monsoon." },
+                    { id: "08", title: "Village Library Building", status: "Ongoing", statusColor: "bg-orange-500", scheme: "Member of Parliament Fund", date: "15/10/2024", cost: "₹12,00,000", progress: "30", note: "Foundation work completed." },
+                    { id: "09", title: "Anganwadi Center Paint", status: "Completed", statusColor: "bg-green-600", scheme: "Child Development Fund", date: "05/11/2024", cost: "₹85,000", progress: "100", note: "Vibrant educational mural added." },
+                    { id: "10", title: "Panchayat Ghar Boundary", status: "Completed", statusColor: "bg-green-600", scheme: "General Development Fund", date: "20/12/2024", cost: "₹2,10,000", progress: "100", note: "Fencing and gate installed." },
+                    { id: "11", title: "Community Hall Tiling", status: "Completed", statusColor: "bg-green-600", scheme: "Village Infrastructure", date: "10/01/2025", cost: "₹3,40,000", progress: "100", note: "Anti-skid tiles used." },
+                    { id: "12", title: "Drainage System (Phase 1)", status: "Ongoing", statusColor: "bg-orange-500", scheme: "Clean Village Drive", date: "25/01/2025", cost: "₹15,00,000", progress: "15", note: "Pipeline laying started." },
+                    { id: "13", title: "CCTV Security Cameras", status: "Completed", statusColor: "bg-green-600", scheme: "Village Safety Fund", date: "12/02/2025", cost: "₹1,20,000", progress: "100", note: "12 high-def cameras active." },
+                    { id: "14", title: "Cattle Shed (Goshala)", status: "Completed", statusColor: "bg-green-600", scheme: "Animal Welfare Scheme", date: "01/03/2025", cost: "₹5,50,000", progress: "100", note: "Capacity for 50 cattle." },
+                    { id: "15", title: "Women Sewing Center", status: "Ongoing", statusColor: "bg-orange-500", scheme: "Skill Development", date: "15/03/2025", cost: "₹2,40,000", progress: "70", note: "Machines being procured." }
+                ];
+
+                projects.forEach(p => {
+                    document.write(`
+                        <div class="bg-white rounded-3xl shadow-lg border border-slate-100 p-8 relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 left-8 ribbon"></div>
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="pt-2">
+                                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Government Task ${p.id}</p>
+                                        <h3 class="text-xl font-black text-slate-900 leading-tight">${p.title}</h3>
+                                    </div>
+                                    <span class="${p.statusColor} text-white text-[10px] font-black px-4 py-1 rounded-full uppercase">${p.status}</span>
+                                </div>
+                                <div class="text-[11px] text-slate-500 font-bold mb-6">
+                                    <p class="opacity-60 mb-1 uppercase tracking-tighter">Scheme:</p>
+                                    <p class="text-slate-800">${p.scheme}</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between text-[11px] font-black mb-1 uppercase">
+                                        <span class="text-slate-400">Reg. Date: ${p.date}</span>
+                                        <span class="text-blue-700 font-black text-sm">${p.cost}</span>
+                                    </div>
+                                    <div class="progress-bg"><div class="bg-blue-600 h-full rounded-full" style="width: ${p.progress}%"></div></div>
+                                </div>
+                                <div class="border-t pt-4">
+                                    <p class="text-[11px] text-slate-400 font-bold italic">Note: ${p.note}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-white py-12 text-center mt-20">
+        <p class="text-[10px] opacity-40 uppercase tracking-widest mb-2 font-black">Official Gram Panchayat Public Portal</p>
+        <p class="text-sm font-bold">&copy; 2026 District Administration. All Data Verified.</p>
+    </footer>
+
+</body>
+</html>

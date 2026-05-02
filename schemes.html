@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Village Schemes | Gram Panchayat Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gov-blue { background-color: #0b3d91; }
+        .scheme-card:hover { transform: scale(1.02); transition: 0.3s; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-white border-b-4 border-blue-900 shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-14">
+                <div>
+                    <h1 class="text-2xl font-black text-blue-900 uppercase">Gram Panchayat Portal</h1>
+                    <p class="text-xs font-bold text-orange-600">State Rural Development Department</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-6 font-bold text-sm text-blue-900">
+                <a href="index.html" class="hover:text-orange-600">HOME</a>
+                <a href="services.html" class="hover:text-orange-600">SERVICES</a>
+                <a href="schemes.html" class="text-orange-600 border-b-2 border-orange-600">SCHEMES</a>
+                <a href="gallery.html" class="hover:text-orange-600">GALLERY</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-black text-blue-900 mb-2 underline decoration-orange-500 underline-offset-8">Welfare Schemes & Programs</h2>
+            <p class="text-gray-600 font-medium">Empowering every household with direct government benefits.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-orange-500 scheme-card">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-home text-3xl text-orange-500"></i>
+                        <h3 class="text-xl font-bold text-gray-800">PM Awas Yojana</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Financial assistance for construction of permanent houses for homeless villagers. Includes ₹1.2 Lakh subsidy.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs mb-4">
+                        <p><strong>Eligibility:</strong> BPL Families / Homeless</p>
+                        <p><strong>Required:</strong> Ration Card, Income Certificate</p>
+                    </div>
+                    <a href="Pm_Awas.html" class="block text-center bg-blue-900 text-white font-bold py-2 rounded hover:bg-blue-800">Apply Online</a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-green-500 scheme-card">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-tractor text-3xl text-green-500"></i>
+                        <h3 class="text-xl font-bold text-gray-800">PM-Kisan Nidhi</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Direct income support of ₹6,000 per year in three installments directly into farmer bank accounts.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs mb-4">
+                        <p><strong>Eligibility:</strong> Land-owning Farmer Families</p>
+                        <p><strong>Required:</strong> 7/12 Extract, Bank Passbook</p>
+                    </div>
+                   <a href="Pm_Kisan.html"> <button class="w-full bg-green-700 text-white font-bold py-2 rounded hover:bg-green-800">Check Beneficiary List</button></a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-blue-600 scheme-card">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-user-digging text-3xl text-blue-600"></i>
+                        <h3 class="text-xl font-bold text-gray-800">MGNREGA Work</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Guaranteed 100 days of wage employment in a financial year for adult members of rural households.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs mb-4">
+                        <p><strong>Eligibility:</strong> Any adult villager</p>
+                        <p><strong>Required:</strong> Job Card, Aadhar Card</p>
+                    </div>
+                    <a href="Manarega.html" class="block text-center bg-blue-900 text-white font-bold py-2 rounded hover:bg-blue-800">Request Work</a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-red-500 scheme-card">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-heartbeat text-3xl text-red-500"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Ayushman Bharat</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Free health insurance coverage up to ₹5 Lakh per family per year for secondary and tertiary care.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs mb-4">
+                        <p><strong>Eligibility:</strong> SECC Data listed families</p>
+                        <p><strong>Required:</strong> Golden Card / PM Letter</p>
+                    </div>
+                   <a href="ayushyaManBharat.html"> <button class="w-full bg-red-600 text-white font-bold py-2 rounded hover:bg-red-700">Find Hospital</button></a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-purple-500 scheme-card">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-user-graduate text-3xl text-purple-500"></i>
+                        <h3 class="text-xl font-bold text-gray-800">State Scholarship</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Financial support for students belonging to SC/ST/OBC and Minority categories for higher studies.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs mb-4">
+                        <p><strong>Eligibility:</strong> Students (Income < 2.5L)</p>
+                        <p><strong>Required:</strong> Bonafide, Caste Certificate</p>
+                    </div>
+                    <a href="Scolorship.html"><button class="w-full bg-purple-700 text-white font-bold py-2 rounded hover:bg-purple-800">Apply Now</button></a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-yellow-500 scheme-card">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-blind text-3xl text-yellow-600"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Old Age Pension</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Monthly financial pension for senior citizens (above 60 years) to live a life of dignity.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs mb-4">
+                        <p><strong>Eligibility:</strong> Age 60+ (BPL)</p>
+                        <p><strong>Required:</strong> Age Proof, Bank Account</p>
+                    </div>
+                    <a href="Pention.html">
+                        <button class="w-full bg-yellow-600 text-white font-bold py-2 rounded hover:bg-yellow-700">Check Eligibility</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-blue-900 text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+            <p>&copy; 2026 Gram Panchayat [Name]. All Rights Reserved.</p>
+            <p class="mt-2 opacity-50 italic">Last Updated: Jan 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

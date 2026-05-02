@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Tax Assessment | Official Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; letter-spacing: -0.01em; }
+        
+        /* Property Theme Pattern */
+        .property-bg {
+            background-color: #f1f5f9;
+            background-image: 
+                linear-gradient(rgba(0, 42, 92, 0.03) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(0, 42, 92, 0.03) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+
+        .gov-shadow { box-shadow: 0 25px 50px -12px rgba(0, 42, 92, 0.15); }
+
+        .form-input-custom {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #e2e8f0 !important;
+        }
+
+        .form-input-custom:focus {
+            border-color: #002a5c !important;
+            box-shadow: 0 0 0 4px rgba(0, 42, 92, 0.1);
+            transform: scale(1.01);
+        }
+
+        /* Building Graphic Accent */
+        .building-accent {
+            position: fixed; bottom: -20px; right: -20px;
+            font-size: 20rem; color: rgba(0, 42, 92, 0.02);
+            z-index: -1; pointer-events: none;
+        }
+    </style>
+</head>
+<body class="property-bg min-h-screen">
+
+    <div class="building-accent"><i class="fas fa-city"></i></div>
+
+    <header class="bg-white/80 backdrop-blur-md py-5 px-10 flex justify-between items-center shadow-lg sticky top-0 z-50 border-b border-blue-100">
+        <div class="flex items-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="h-14">
+            <div class="border-l-2 border-blue-900 pl-4">
+                <h1 class="text-xl font-black text-blue-900 leading-none uppercase tracking-tighter">Gram Panchayat Chincholi</h1>
+                <p class="text-[10px] text-orange-600 font-black uppercase tracking-widest mt-1">Revenue & Property Tax Department</p>
+            </div>
+        </div>
+        <a href="services.html" class="bg-blue-50 text-blue-900 text-xs font-black px-5 py-2.5 rounded-xl uppercase hover:bg-blue-900 hover:text-white transition-all">
+            <i class="fas fa-th-large mr-2"></i> Services
+        </a>
+    </header>
+
+    <main class="max-w-5xl mx-auto py-12 px-6">
+        
+        <div id="formSection" class="bg-white rounded-[3rem] gov-shadow border border-slate-200 overflow-hidden relative">
+            <div class="absolute top-0 right-0 p-8 opacity-5">
+                <i class="fas fa-home text-9xl"></i>
+            </div>
+
+            <div class="bg-blue-900 px-10 py-6 text-white flex justify-between items-center">
+                <div>
+                    <h2 class="text-lg font-black uppercase tracking-tight">Form No. 7: Property Assessment</h2>
+                    <p class="text-[10px] opacity-70 font-bold uppercase tracking-widest">Self-Assessment Scheme (SAS) - 2026</p>
+                </div>
+                <div class="bg-white/20 p-3 rounded-2xl"><i class="fas fa-file-signature text-2xl"></i></div>
+            </div>
+
+            <form id="taxForm" class="p-10 md:p-16 space-y-12 relative" action="save_tax.php" method="post">
+                <section>
+                    <h3 class="text-blue-900 font-black flex items-center gap-3 mb-8 uppercase text-sm tracking-widest">
+                        <span class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center italic text-lg shadow-lg">1</span>
+                        Ownership Identity
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Owner's Legal Name</label>
+                            <input type="text" id="p_name" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="Full name as per Registry" name ="p_name">
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Guardian's Name</label>
+                            <input type="text" id="p_father" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="Father/Husband Name" name ="p_father">
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Aadhaar (Last 4 Digits for verification)</label>
+                            <input type="text" maxlength="12" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="XXXX XXXX XXXX" name ="p_aadhaar">
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Registered Mobile</label>
+                            <input type="tel" id="p_mobile" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="+91 XXXXX XXXXX" name ="p_mobile">
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="text-blue-900 font-black flex items-center gap-3 mb-8 uppercase text-sm tracking-widest">
+                        <span class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center italic text-lg shadow-lg">2</span>
+                        Technical Specifications
+                    </h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-1">
+                            <label class="block font-black text-gray-400 uppercase mb-2">Property Category</label>
+                            <select id="p_type" class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800"name ="p_type">
+                                <option>Residential (House)</option>
+                                <option>Commercial (Shop/Complex)</option>
+                                <option>Open Land / Plot</option>
+                                <option>Industrial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Total Plot Area</label>
+                            <div class="relative">
+                                <input type="number" id="p_area" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="0000" name ="p_area">
+                                <span class="absolute right-4 top-5 font-black text-xs text-gray-400">SQ. FT.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Built-up Area</label>
+                            <div class="relative">
+                                <input type="number" id="p_built" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="0000" name ="p_built">
+                                <span class="absolute right-4 top-5 font-black text-xs text-gray-400">SQ. FT.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Construction Year</label>
+                            <input type="number" id="p_year" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="e.g. 2024" name ="p_year">
+                        </div>
+                        <div class="lg:col-span-2">
+                            <label class="block font-black text-gray-400 uppercase mb-2">Ward & Local Address</label>
+                            <input type="text" id="p_address" required class="form-input-custom w-full p-5 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="Plot No, Ward No, Landmark" name ="p_address">
+                        </div>
+                    </div>
+                </section>
+
+                <div class="pt-8">
+                    <button type="submit" class="group w-full bg-blue-900 text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.2em] hover:bg-black transition-all shadow-2xl shadow-blue-200 text-md flex items-center justify-center gap-4" name ="submit">
+                        Submit for Assessment
+                        <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                    </button>
+                    <p class="text-center text-[10px] text-gray-400 font-bold uppercase mt-6 italic tracking-widest">Authorized revenue portal of local panchayat administration</p>
+                </div>
+            </form>
+        </div>
+
+        <div id="statusSection" class="hidden">
+            <div class="bg-white rounded-[3rem] gov-shadow overflow-hidden border-t-8 border-green-600">
+                <div class="p-12 text-center bg-slate-50/50 border-b">
+                    <div class="w-24 h-24 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-lg shadow-green-200">
+                        <i class="fas fa-stamp"></i>
+                    </div>
+                    <h2 class="text-4xl font-black text-slate-800 uppercase tracking-tight italic">Assessment Filed!</h2>
+                    <p class="text-gray-500 font-bold mt-2 uppercase text-xs tracking-[0.3em]">Online Tax Management System</p>
+                </div>
+                
+                <div class="p-12 space-y-12">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex-1 bg-blue-50 p-8 rounded-[2rem] border border-blue-100">
+                            <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Acknowledgement Number</p>
+                            <p class="text-3xl font-mono font-black text-blue-900" id="res_ack"></p>
+                        </div>
+                        <div class="flex-1 bg-orange-50 p-8 rounded-[2rem] border border-orange-100 flex flex-col justify-center">
+                            <div class="flex items-center gap-3">
+                                <span class="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></span>
+                                <span class="text-orange-700 font-black text-sm uppercase tracking-widest">Inspection Scheduled</span>
+                            </div>
+                            <p class="text-[10px] text-orange-600/60 font-bold mt-2">Revenue officer will visit for physical verification within 7 days.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-4">
+                            <div class="h-px bg-slate-200 flex-1"></div>
+                            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em]">Verified Data</h3>
+                            <div class="h-px bg-slate-200 flex-1"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-y-10">
+                            <div><p class="text-slate-400 text-[10px] uppercase font-black mb-1">Registered Owner</p><p id="out_name" class="font-bold text-slate-800 text-lg"></p></div>
+                            <div><p class="text-slate-400 text-[10px] uppercase font-black mb-1">Asset Type</p><p id="out_type" class="font-bold text-slate-800 text-lg"></p></div>
+                            <div><p class="text-slate-400 text-[10px] uppercase font-black mb-1">Total Dimensions</p><p id="out_area" class="font-bold text-slate-800 text-lg"></p></div>
+                            <div><p class="text-slate-400 text-[10px] uppercase font-black mb-1">Built Coverage</p><p id="out_built" class="font-bold text-slate-800 text-lg"></p></div>
+                            <div><p class="text-slate-400 text-[10px] uppercase font-black mb-1">Construction</p><p id="out_year" class="font-bold text-slate-800 text-lg"></p></div>
+                            <div><p class="text-slate-400 text-[10px] uppercase font-black mb-1">Primary Contact</p><p id="out_mobile" class="font-bold text-slate-800 text-lg"></p></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+                        <i class="fas fa-print absolute -left-4 -bottom-4 text-9xl opacity-10"></i>
+                        <div class="relative">
+                            <h4 class="text-xl font-black mb-1">Download Final Copy</h4>
+                            <p class="text-xs text-slate-400 font-bold">Please carry a printed copy for physical inspection.</p>
+                        </div>
+                        <div class="flex gap-4 w-full md:w-auto relative">
+                            <button onclick="window.print()" class="flex-1 md:flex-none bg-white text-black px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all">Print</button>
+                            <button onclick="location.reload()" class="flex-1 md:flex-none border border-white/20 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">&copy; 2026 Local Governance Revenue Portal</p>
+    </footer>
+
+    <script>
+    document.getElementById('taxForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 1. Form Data collect karna
+        const formData = new FormData(this);
+
+        // 2. Database mein save karna
+        fetch('save_tax.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                const appId = data.ackID;
+
+                // 3. Aapki Original Reflect Logic (No change)
+                document.getElementById('res_ack').innerText = appId + "-GP-2026";
+                document.getElementById('out_name').innerText = document.getElementById('p_name').value;
+                document.getElementById('out_type').innerText = document.getElementById('p_type').value;
+                document.getElementById('out_area').innerText = document.getElementById('p_area').value + " Sq. Ft.";
+                document.getElementById('out_built').innerText = document.getElementById('p_built').value + " Sq. Ft.";
+                document.getElementById('out_year').innerText = document.getElementById('p_year').value;
+                document.getElementById('out_mobile').innerText = document.getElementById('p_mobile').value;
+
+                // 4. Aapki Original UI Switch Logic (No change)
+                document.getElementById('formSection').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('formSection').classList.add('hidden');
+                    document.getElementById('statusSection').classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 300);
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Server connection failed!");
+        });
+    });
+</script>
+</body>
+</html>

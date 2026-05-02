@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMAY Application | Detailed Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, button { font-family: 'Poppins', sans-serif; }
+
+        .pmay-gradient-bg {
+            background: radial-gradient(circle at 0% 0%, #f0f4f8 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .shape-1 { position: absolute; top: -50px; right: -50px; width: 300px; height: 300px; background: rgba(59, 130, 246, 0.05); border-radius: 50%; z-index: 0; }
+        .shape-2 { position: absolute; bottom: 10%; left: -100px; width: 400px; height: 400px; background: rgba(249, 115, 22, 0.05); border-radius: 50%; z-index: 0; }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 10;
+        }
+        .input-focus:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        .section-divider {
+            display: flex;
+            align-items: center;
+            margin: 2.5rem 0 1.5rem;
+            color: #1e3a8a;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem; /* Increased font size */
+        }
+        .section-divider::after { content: ""; flex: 1; margin-left: 1rem; height: 2px; background: #cbd5e1; }
+        
+        /* Validation Styling */
+        input:invalid { border-color: #ef4444; }
+        .error-msg { color: #ef4444; font-size: 0.75rem; font-weight: bold; margin-top: 4px; display: none; }
+    </style>
+</head>
+<body class="pmay-gradient-bg">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+
+    <div id="successModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2.5rem] p-10 max-w-lg w-full text-center shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 mb-2">Application Submitted!</h2>
+            <p class="text-gray-500 font-bold mb-6">Redirecting to home in <span id="timer" class="text-blue-600">5</span> seconds...</p>
+            <div class="bg-slate-50 p-6 rounded-2xl text-left border border-dashed border-gray-300 space-y-2">
+                <p class="text-sm font-bold text-gray-700">Name: <span id="resName" class="font-normal"></span></p>
+                <p class="text-sm font-bold text-gray-700">App ID: <span id="resID" class="text-blue-600"></span></p>
+                <p class="text-sm font-bold text-gray-700">Status: <span class="text-orange-500">PENDING VERIFICATION</span></p>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 py-5 px-10">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-14">
+                <div>
+                    <h1 class="text-2xl font-black text-blue-900 leading-none">PMAY-G APPLICATION</h1>
+                    <p class="text-xs font-bold text-orange-600 tracking-widest uppercase">Panchayat Administration Portal</p>
+                </div>
+            </div>
+            <button onclick="window.location.href='index.html'" class="text-gray-500 hover:text-blue-600 font-bold text-md">
+                <i class="fas fa-arrow-left mr-2"></i> BACK TO HOME
+            </button>
+        </div>
+    </header>
+
+    <div class="max-w-5xl mx-auto py-12 px-6">
+        <div class="form-container p-8 md:p-14 rounded-[3rem] shadow-2xl relative">
+            <div class="text-center mb-12">
+                <div class="inline-block bg-orange-100 text-orange-700 px-6 py-1.5 rounded-full text-sm font-black mb-4 tracking-widest">FORM-7A (ANNEXURE)</div>
+                <h2 class="text-4xl font-black text-blue-900">Registration of Beneficiary</h2>
+                <p class="text-lg text-gray-500 mt-2 font-medium">Official Online Portal for Housing Subsidy</p>
+            </div>
+
+            <form id="pmayDetailedForm" onsubmit="handleFormSubmit(event)" class="space-y-8" action="save_pmay.php" method="post">
+                
+                <div class="section-divider text-lg">01. Personal Information</div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Full Name (As per Aadhar) <span class="text-red-500" >*</span></label>
+                        <input type="text" id="fullName" required placeholder="Enter full name" class="w-full p-5 bg-white border-2 rounded-2xl input-focus transition-all outline-none text-lg" name = "FullName">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Mobile Number <span class="text-red-500" >*</span></label>
+                        <input type="tel" required pattern="[0-9]{10}" placeholder="10 Digit Number" class="w-full p-5 bg-white border-2 rounded-2xl input-focus transition-all outline-none text-lg" name = "MobileNumber">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Aadhar Number <span class="text-red-500">*</span></label>
+                        <input type="text" required pattern="[0-9]{12}" placeholder="12 Digit Number" class="w-full p-5 bg-white border-2 rounded-2xl input-focus transition-all outline-none text-lg" name = "AadharNumber">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Voter ID (EPIC)</label>
+                        <input type="text" required placeholder="XYZ1234567" class="w-full p-5 bg-white border-2 rounded-2xl input-focus transition-all outline-none text-lg" name = "VoterID">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Date of Birth <span class="text-red-500">*</span></label>
+                        <input type="date" required class="w-full p-5 bg-white border-2 rounded-2xl input-focus transition-all outline-none text-lg" name = "DOB">
+                    </div>
+                </div>
+
+                <div class="section-divider text-lg">02. Socio-Economic Details</div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Category</label>
+                        <select required class="w-full p-5 bg-white border-2 rounded-2xl outline-none text-lg" name = "Category">
+                            <option value="">Select</option>
+                            <option>SC</option><option>ST</option><option>OBC</option><option>General</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Religion</label>
+                        <select required class="w-full p-5 bg-white border-2 rounded-2xl outline-none text-lg" name = "Religion">
+                            <option value="">Select</option>
+                            <option>Hinduism</option><option>Islam</option><option>Sikhism</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Disability (PH)</label>
+                        <select class="w-full p-5 bg-white border-2 rounded-2xl outline-none text-lg" name = "Disability">
+                            <option>No</option><option>Yes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">BPL Card No.</label>
+                        <input type="text" required placeholder="BPL-XXXXX" class="w-full p-5 bg-white border-2 rounded-2xl input-focus outline-none text-lg" name = "BPLCardNo">
+                    </div>
+                </div>
+
+                <div class="section-divider text-lg">03. Financial Details</div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Occupation</label>
+                        <select required class="w-full p-5 bg-white border-2 rounded-2xl outline-none text-lg" name = "Occupation">
+                            <option value="">Select</option>
+                            <option>Labour</option><option>Farmer</option><option>Artisan</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Annual Income <span class="text-red-500">*</span></label>
+                        <input type="number" required placeholder="INR ₹" class="w-full p-5 bg-white border-2 rounded-2xl input-focus outline-none text-lg" name = "AnnualIncome">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Bank Account No.</label>
+                        <input type="text" required placeholder="Account Number" class="w-full p-5 bg-white border-2 rounded-2xl input-focus outline-none text-lg" name = "BankAccountNo">
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Bank IFSC Code</label>
+                        <input type="text" required pattern="^[A-Z]{4}0[A-Z0-9]{6}$" placeholder="SBIN000XXXX" class="w-full p-5 bg-white border-2 rounded-2xl input-focus outline-none text-lg uppercase" name = "BankIFSC">
+                    </div>
+                </div>
+
+                <div class="section-divider text-lg">04. Existing Residence</div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Ward Number</label>
+                        <input type="number" required min="1" max="50" placeholder="Ward 1-50" class="w-full p-5 bg-white border-2 rounded-2xl input-focus outline-none text-lg" name = "WardNumber">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Current House Type</label>
+                        <select required class="w-full p-5 bg-white border-2 rounded-2xl outline-none text-lg" name = "HouseType">
+                            <option value="">Select</option>
+                            <option>Kutcha (Hut)</option><option>Semi-Kutcha</option><option>Homeless</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-black text-gray-500 uppercase mb-2 tracking-wide">Room Count</label>
+                        <input type="number" required min="0" max="2" placeholder="0-2 Rooms" class="w-full p-5 bg-white border-2 rounded-2xl input-focus outline-none text-lg" name = "RoomCount">
+                    </div>
+                </div>
+
+                <div class="bg-blue-50/50 p-8 rounded-[2rem] border-2 border-blue-100 mt-10">
+                    <div class="flex items-start gap-5">
+                        <input type="checkbox" required class="mt-1.5 w-6 h-6 accent-blue-600 cursor-pointer" name = "Declaration">
+                        <p class="text-md text-blue-900 font-bold leading-relaxed">
+                            I hereby declare that all information provided is true. I do not own a pucca house anywhere in India. If found false, my application will be rejected immediately.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center gap-6 pt-10">
+                    <button type="submit" class="w-full md:w-3/4 bg-blue-900 hover:bg-blue-800 text-white py-6 rounded-[2.5rem] font-black text-2xl shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 uppercase tracking-wide" name = "SubmitApplication">
+                        Submit Official Application
+                    </button>
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Digital India • Gram Swaraj Portal</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        
+        const form = document.getElementById('pmayDetailedForm');
+        const formData = new FormData(form);
+
+        // Sending data to PHP
+        fetch('save_pmay.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                // UI Update (Original Design)
+                document.getElementById('resName').innerText = document.getElementById('fullName').value;
+                document.getElementById('resID').innerText = data.appID;
+                
+                const modal = document.getElementById('successModal');
+                modal.classList.remove('hidden');
+
+                // Timer & Redirect
+                let count = 5;
+                const timerElement = document.getElementById('timer');
+                const countdown = setInterval(() => {
+                    count--;
+                    timerElement.innerText = count;
+                    if (count <= 0) {
+                        clearInterval(countdown);
+                        window.location.href = "index.html"; 
+                    }
+                }, 1000);
+            } else {
+                alert("Database Error: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Fatal Error: Could not connect to save_pmay.php");
+        });
+    }
+</script>
+</body>
+</html>

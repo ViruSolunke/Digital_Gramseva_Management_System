@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Panchayat | Official Voter Records</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f1f5f9;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23002a5c' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        .table-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e2e8f0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+        .gov-header {
+            background: linear-gradient(135deg, #002a5c 0%, #001a3a 100%);
+        }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        tr:hover { background-color: #f1f7ff; transition: 0.2s; }
+        .sticky-th { position: sticky; top: 0; background: #f8fafc; z-index: 10; border-bottom: 2px solid #e2e8f0; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-white rounded-2xl shadow-sm border border-slate-200">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-12">
+                </div>
+                <div>
+                    <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">E-Voter Digital Ledger</h1>
+                    <p class="text-sm font-medium text-blue-700">Gram Panchayat: Malviya Nagar | Session 2025-26</p>
+                </div>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="window.print()" class="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl font-bold text-slate-700 hover:bg-slate-50 transition-all shadow-sm">
+                    <i class="fas fa-file-pdf text-red-500"></i> Export PDF
+                </button>
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="tableSearch" onkeyup="searchTable()" placeholder="Quick Search..." 
+                    class="pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 w-64 shadow-sm">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container shadow-2xl shadow-slate-200/50">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse" id="voterTable">
+                    <thead>
+                        <tr class="sticky-th">
+                            <th class="p-5 text-[11px] font-black text-slate-500 uppercase tracking-widest">Serial</th>
+                            <th class="p-5 text-[11px] font-black text-slate-500 uppercase tracking-widest">Voter Identity</th>
+                            <th class="p-5 text-[11px] font-black text-slate-500 uppercase tracking-widest">Guardian Details</th>
+                            <th class="p-5 text-[11px] font-black text-slate-500 uppercase tracking-widest">Gender/Age</th>
+                            <th class="p-5 text-[11px] font-black text-slate-500 uppercase tracking-widest">House & Ward</th>
+                            <th class="p-5 text-[11px] font-black text-slate-500 uppercase tracking-widest">EPIC Number</th>
+                            <th class="p-5 text-[11px] font-black text-slate-500 uppercase tracking-widest text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="divide-y divide-slate-100">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-between items-center px-4">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-tighter">Computer Generated Official Document - No Signature Required</p>
+            <div class="flex gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <span class="text-[10px] font-bold text-slate-500 uppercase">Live Database Connected</span>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // 👉 Final Data with Gender
+    const customData = [
+        { name: "Indubai Shalik Salunkhe", gender: "F" },
+        { name: "Tulasabai Wyas Patil", gender: "F" },
+        { name: "Bebabai Sanadhan More", gender: "F" },
+        { name: "Bikan Puna Bhirade", gender: "M" },
+        { name: "Bhaskar Dudku More", gender: "M" },
+        { name: "Dhondu Amarut Sapkale", gender: "M" },
+        { name: "Sharad Manik Engale", gender: "M" },
+        { name: "Indubai Kailas Salunkhe", gender: "F" },
+        { name: "Kashinath Bhiva Sonawane", gender: "M" },
+        { name: "Mahendra Khanderao Khaire", gender: "M" },
+        { name: "Chandrabai Rupchand Bagul", gender: "F" },
+        { name: "Balu Madhukar Nanavre", gender: "M" },
+        { name: "Subhash Tukaram Fugare", gender: "M" },
+        { name: "Samadhan Sahebrao Salunke", gender: "M" },
+        { name: "Prakash Chavdas Pawar", gender: "M" },
+        { name: "Pramila Prakash Tayade", gender: "F" },
+        { name: "Bhagwat Prakash Tayade", gender: "M" },
+        { name: "Maltiba Sahebrao Salunke", gender: "F" },
+        { name: "Santosh Sakharam Adakmoi", gender: "M" },
+        { name: "Raju Aychit Patat", gender: "M" },
+
+        { name: "Jama Jirban Barela", gender: "F" },
+        { name: "Sitaram Ziparu Sirsat", gender: "M" },
+        { name: "Himmat Yadav Patil", gender: "M" },
+        { name: "Supadu Hari Badgujar", gender: "M" },
+        { name: "Jangalu Dhana Dhangar", gender: "M" },
+        { name: "Shekhar Devidas Surywanshi", gender: "M" },
+        { name: "Parmila Mahesh Sathe", gender: "F" },
+        { name: "Hiraman Shravan Patil", gender: "M" },
+        { name: "Jijabai Rajaram Sonwane", gender: "F" },
+        { name: "Ramchandra Yadav Patil", gender: "M" },
+        { name: "Pandharinath Ratan Patil", gender: "M" },
+        { name: "Dilip Dagadu Dhangar", gender: "M" },
+        { name: "Vasant Ratan Patil", gender: "M" },
+        { name: "Dilip Ramdas Dhangar", gender: "M" },
+        { name: "Nirmalbai Ashok Dhangar", gender: "F" },
+        { name: "Gopal Dondu Patil", gender: "M" },
+        { name: "Vasudev Pundalik Dhangar", gender: "M" },
+        { name: "Sukram Vana Patil", gender: "M" },
+        { name: "Manglabai Ramesh Lohar", gender: "F" },
+        { name: "Manoha Ramesh Bondare", gender: "F" },
+        { name: "Sunita Prakash Lohar", gender: "F" },
+        { name: "Bapu Gulab Patil", gender: "M" },
+        { name: "Sumanbai Gokul Dhangar", gender: "F" },
+        { name: "Kamal Gulab Patil", gender: "M" },
+        { name: "Sopan Gokul Dhangar", gender: "M" },
+        { name: "Ambadas Bhila Patil", gender: "M" },
+        { name: "Sunil Gangaram Patil", gender: "M" },
+        { name: "Chhaya Yuvaraj Patil", gender: "F" },
+        { name: "Ishwar Gangaram Patil", gender: "M" },
+        { name: "Nageshwar Nathu Patil", gender: "M" }
+    ];
+
+    function generateRecords() {
+        const tbody = document.getElementById('tableBody');
+        let rows = "";
+
+        for (let i = 0; i < customData.length; i++) {
+            const person = customData[i];
+            const fullName = person.name.trim().split(" ");
+
+            const firstName = fullName[0];
+            const middleName = fullName[1] || "-";
+            const lastName = fullName[2] || "";
+
+            const displayName = firstName + " " + lastName;
+            const gender = person.gender === "M" ? "MALE" : "FEMALE";
+
+            const isVerified = Math.random() > 0.2;
+            const ward = Math.floor(Math.random() * 12) + 1;
+
+            rows += `
+                <tr>
+                    <td class="p-5 text-sm font-bold text-slate-400">#${(i+1).toString().padStart(3, '0')}</td>
+
+                    <td class="p-5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-[10px] font-black border border-blue-100">
+                                ${firstName.charAt(0)}
+                            </div>
+                            <span class="text-sm font-extrabold text-slate-800 uppercase">${displayName}</span>
+                        </div>
+                    </td>
+
+                    <td class="p-5">
+                        <p class="text-[10px] font-black text-slate-400 uppercase leading-none">Father/Husband</p>
+                        <p class="text-sm font-semibold text-slate-600">${middleName}</p>
+                    </td>
+
+                    <td class="p-5">
+                        <span class="px-2 py-1 rounded-md bg-slate-100 text-[10px] font-bold text-slate-600 mr-2">${gender}</span>
+                        <span class="text-sm font-bold text-slate-800">${20 + Math.floor(Math.random() * 50)} Yrs</span>
+                    </td>
+
+                    <td class="p-5">
+                        <p class="text-sm font-bold text-slate-800">H.No ${100 + i}</p>
+                        <p class="text-[10px] font-black text-blue-600 uppercase tracking-widest">Ward 0${ward}</p>
+                    </td>
+
+                    <td class="p-5">
+                        <span class="text-sm font-mono font-black text-blue-900 tracking-tighter">WTR${880000 + i}</span>
+                    </td>
+
+                    <td class="p-5 text-center">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest 
+                        ${isVerified ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">
+                            <span class="w-1.5 h-1.5 rounded-full ${isVerified ? 'bg-emerald-500' : 'bg-amber-500'}"></span>
+                            ${isVerified ? 'Verified' : 'Pending'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }
+
+        tbody.innerHTML = rows;
+    }
+
+    function searchTable() {
+        let input = document.getElementById("tableSearch");
+        let filter = input.value.toUpperCase();
+        let tr = document.getElementById("voterTable").getElementsByTagName("tr");
+
+        for (let i = 1; i < tr.length; i++) {
+            let text = tr[i].innerText.toUpperCase();
+            tr[i].style.display = text.indexOf(filter) > -1 ? "" : "none";
+        }
+    }
+
+    window.onload = generateRecords;
+</script>
+</body>
+</html>

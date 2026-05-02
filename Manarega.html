@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGNREGA Work Request | Chincholi Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: #fdfdfd;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(20, 83, 45, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(202, 138, 4, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .premium-form-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-premium {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .input-premium:focus {
+            border-color: #166534;
+            background: white;
+            box-shadow: 0 0 15px rgba(22, 101, 52, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-request {
+            background: linear-gradient(135deg, #166534 0%, #064e3b 100%);
+            box-shadow: 0 10px 25px -5px rgba(22, 101, 52, 0.4);
+        }
+
+        .btn-request:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px -5px rgba(22, 101, 52, 0.5);
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b-4 border-green-800 py-5 px-10 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-14">
+            <div>
+                <h1 class="font-[900] text-2xl text-green-900 leading-none tracking-tight">MGNREGA WORK SERVICE</h1>
+                <p class="text-[11px] font-bold text-amber-600 uppercase tracking-[0.2em] mt-1">Village: Chincholi | Digital Rozgar Sahayak</p>
+            </div>
+        </div>
+        <div class="flex gap-4 no-print">
+            <a href="schemes.html" class="bg-white text-green-900 border-2 border-green-900 px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-green-900 hover:text-white transition-all">
+            <i class="fas fa-arrow-left mr-2"></i> Back
+        </a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto mt-12 px-6">
+        
+        <div class="mb-10 text-center lg:text-left">
+            <span class="bg-green-100 text-green-800 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Demand for Work (Form-6)</span>
+            <h2 class="text-4xl font-[900] text-slate-800 mt-4 tracking-tighter">Request New Employment</h2>
+            <p class="text-slate-500 font-medium text-lg">According to the MGNREGA Act, employment will be provided within 15 days of demand.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-10">
+            
+            <div class="lg:col-span-2 premium-form-card p-10 rounded-[3rem]">
+                <form id="workRequestForm" class="space-y-8" action="save_request.php" method="post">
+                    
+                    <div class="space-y-6">
+                        <h3 class="text-sm font-black text-green-800 uppercase tracking-widest border-b pb-2">Worker Identity</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-2">Job Card Number</label>
+                                <input type="text" id="job_card" required placeholder="MH-01-002-..." class="input-premium w-full px-6 py-4 rounded-2xl font-bold text-slate-700 outline-none" name ="job_card">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-2">Applicant Name</label>
+                                <input type="text" id="worker_name" required placeholder="As per Job Card" class="input-premium w-full px-6 py-4 rounded-2xl font-bold text-slate-700 outline-none" name ="worker_name">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black text-slate-400 uppercase ml-2">Aadhaar Number (Linked)</label>
+                            <input type="text" id="worker_aadhaar" required maxlength="14" placeholder="XXXX-XXXX-XXXX" class="input-premium w-full px-6 py-4 rounded-2xl font-black text-slate-800 tracking-widest outline-none" name ="worker_aadhaar">
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 pt-6">
+                        <h3 class="text-sm font-black text-amber-700 uppercase tracking-widest border-b pb-2">Work Schedule</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-2">From Date</label>
+                                <input type="date" id="start_date" required class="input-premium w-full px-6 py-4 rounded-2xl font-bold text-slate-700 outline-none" name ="start_date">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase ml-2">Number of Days</label>
+                                <input type="number" id="days_count" required min="1" max="100" placeholder="e.g. 15" class="input-premium w-full px-6 py-4 rounded-2xl font-bold text-slate-700 outline-none" name ="days_count">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 p-6 rounded-3xl border border-amber-100 flex gap-4">
+                        <input type="checkbox" required class="w-6 h-6 mt-1 accent-green-800" name ="declaration">
+                        <p class="text-xs font-bold text-amber-900 leading-relaxed">I certify that I am ready to work for the requested period in Chincholi village area. I am aware of my rights under the MGNREGA Act 2005.</p>
+                    </div>
+
+                    <button type="submit" class="btn-request w-full text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-4" name ="submit_request">
+                        Submit Work Demand <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-green-900 p-8 rounded-[3rem] text-white shadow-xl relative overflow-hidden">
+                    <i class="fas fa-info-circle absolute -right-4 -top-4 text-8xl opacity-10"></i>
+                    <h4 class="text-xl font-black mb-4">Worker Rights</h4>
+                    <ul class="text-xs space-y-4 font-medium text-green-100">
+                        <li class="flex gap-3"><i class="fas fa-check-circle text-amber-400"></i> Work within 5km radius</li>
+                        <li class="flex gap-3"><i class="fas fa-check-circle text-amber-400"></i> Drinking water at site</li>
+                        <li class="flex gap-3"><i class="fas fa-check-circle text-amber-400"></i> Crèche for children</li>
+                        <li class="flex gap-3"><i class="fas fa-check-circle text-amber-400"></i> Direct Bank Payment</li>
+                    </ul>
+                </div>
+
+                <div class="premium-form-card p-8 rounded-[3rem] border-dashed border-2">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Help Desk</p>
+                    <p class="text-xl font-black text-slate-800">1800-111-555</p>
+                    <p class="text-[10px] font-bold text-green-600 mt-2">Gram Rozgar Sahayak: Chincholi</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="successModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-[3rem] p-10 text-center shadow-2xl">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                <i class="fas fa-clipboard-check"></i>
+            </div>
+            <h3 class="text-2xl font-[900] text-slate-800 tracking-tighter">Request Registered!</h3>
+            <p class="text-slate-500 font-bold mt-2 text-sm">Acknowledgment Receipt Generated for Chincholi Gram Panchayat.</p>
+            
+            <div class="my-8 p-6 bg-slate-50 rounded-3xl border border-slate-100 text-left space-y-3">
+                <div class="flex justify-between text-xs"><span class="text-slate-400 font-bold">Worker:</span><span id="res_name" class="font-black"></span></div>
+                <div class="flex justify-between text-xs"><span class="text-slate-400 font-bold">Ref ID:</span><span id="res_id" class="font-mono font-black text-green-700"></span></div>
+                <div class="flex justify-between text-xs"><span class="text-slate-400 font-bold">Status:</span><span id="res_status" class="font-black text-green-600"></span></div>
+                <div class="flex justify-between text-xs"><span class="text-slate-400 font-bold">Date:</span><span class="font-black">11-01-2026</span></div>
+            </div>
+
+            <div class="flex gap-4">
+                <button onclick="window.print()" class="flex-1 bg-green-800 text-white py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg">Download Receipt</button>
+                <button onclick="location.reload()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      
+    const validatedWorkers = [
+        { job: "MH-01-001", name: "Pandurang Gaikwad", aadhaar: "4582-9910-1234", status: "Work Allocated" },
+        { job: "MH-01-002", name: "Sopan Patil", aadhaar: "5512-4432-8876", status: "Pending Approval" },
+        { job: "MH-01-003", name: "Vitthal Deshmukh", aadhaar: "1122-3344-5566", status: "Work Allocated" },
+        { job: "MH-01-004", name: "Namdev Kadam", aadhaar: "9988-7766-5544", status: "Verified" },
+         { job: "MH-01-005", name: "Suresh Mane", aadhaar: "7744-1122-3399", status: "Pending Approval" },
+         { job: "MH-01-006", name: "Rajesh Shinde", aadhaar: "6655-4433-2211", status: "Work Allocated" },
+        { job: "MH-01-007", name: "Anil More", aadhaar: "3322-1144-5588", status: "Pending Approval" },
+         { job: "MH-01-008", name: "Sunil Pawar", aadhaar: "1234-5678-9012", status: "Verified" },
+        { job: "MH-01-009", name: "Manoj Rathod", aadhaar: "9012-3456-7890", status: "Work Allocated" },
+        { job: "MH-01-010", name: "Vijay Thite", aadhaar: "5678-9012-3456", status: "Pending Approval" }
+        // ... (aapke baaki records yahan rahenge)
+    ];
+
+    document.getElementById('workRequestForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = e.target.querySelector('button');
+        const originalContent = btn.innerHTML;
+        const formData = new FormData(this);
+
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving to Database...';
+        btn.disabled = true;
+
+        // Logic to determine Status and RefID
+        const inputAadhaar = document.getElementById('worker_aadhaar').value;
+        const inputName = document.getElementById('worker_name').value.toLowerCase();
+        const foundWorker = validatedWorkers.find(w => w.aadhaar === inputAadhaar && w.name.toLowerCase().includes(inputName));
+
+        const finalStatus = foundWorker ? foundWorker.status : "Request Submitted";
+        const finalRefId = foundWorker ? foundWorker.job : "NREGA-" + Math.floor(Math.random() * 900000 + 100000);
+
+        // Add calculated values to FormData
+        formData.append('status', finalStatus);
+        formData.append('ref_id', finalRefId);
+
+        // --- FETCH CALL TO SAVE DATA ---
+        fetch('save_request.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                // Show Success UI
+                document.getElementById('res_name').innerText = formData.get('worker_name');
+                document.getElementById('res_id').innerText = finalRefId;
+                document.getElementById('res_status').innerText = finalStatus;
+                document.getElementById('successModal').classList.remove('hidden');
+            } else {
+                alert("Database Error: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Server connection failed!");
+        })
+        .finally(() => {
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+        });
+    });
+
+    // Aadhaar Formatting
+    document.getElementById('worker_aadhaar').addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1-').replace(/-$/, '').slice(0, 14);
+    });
+</script>
+</body>
+</html>

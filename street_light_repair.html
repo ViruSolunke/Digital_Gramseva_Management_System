@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Light Repair | Official Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; letter-spacing: -0.01em; }
+        
+        /* Electric Maintenance Theme */
+        .electric-bg {
+            background-color: #f0f4f8;
+            background-image: radial-gradient(#002a5c 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+        .glow-border {
+            transition: all 0.3s ease;
+        }
+        .glow-border:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .status-card {
+            background: linear-gradient(145deg, #ffffff, #f0f4f8);
+            border: 1px solid rgba(0, 42, 92, 0.1);
+        }
+
+        .light-icon {
+            filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.5));
+        }
+    </style>
+</head>
+<body class="electric-bg min-h-screen">
+
+    <header class="bg-white/90 backdrop-blur-md py-4 px-10 flex justify-between items-center shadow-lg sticky top-0 z-50 border-b-4 border-blue-900">
+        <div class="flex items-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="h-14">
+            <div class="border-l-2 border-gray-300 pl-4">
+                <h1 class="text-xl font-black text-blue-900 leading-none uppercase tracking-tighter">Gram Panchayat Chincholi</h1>
+                <p class="text-[10px] text-blue-600 font-black uppercase tracking-widest mt-1">Electrical Maintenance Cell</p>
+            </div>
+        </div>
+        <a href="services.html" class="group flex items-center gap-2 text-xs font-black text-blue-900 uppercase">
+            <span class="bg-blue-100 p-2 rounded-lg group-hover:bg-blue-900 group-hover:text-white transition-all"><i class="fas fa-arrow-left"></i></span>
+            Back to Services
+        </a>
+    </header>
+
+    <main class="max-w-5xl mx-auto py-12 px-6">
+        
+        <div id="formSection" class="bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden">
+            <div class="bg-blue-900 px-10 py-5 text-white flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] font-bold text-orange-400 uppercase tracking-widest">Grievance Portal</span>
+                    <h2 class="text-lg font-black uppercase">Street Light Fault Reporting</h2>
+                </div>
+                <i class="fas fa-bolt text-2xl text-orange-400 animate-pulse"></i>
+            </div>
+
+            <form id="lightForm" class="p-10 md:p-16 space-y-12" action="save.php" method="post">
+                <section>
+                    <h3 class="text-blue-900 font-black flex items-center gap-3 mb-8 uppercase text-sm tracking-widest italic">
+                        <i class="fas fa-user-circle text-orange-500"></i> 1. Reporter Details
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Complainant Full Name</label>
+                            <input type="text" id="complainant_name" required class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="Type your name" name = "ComName">
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Mobile Number (OTP/Status)</label>
+                            <input type="tel" id="complainant_mobile" required pattern="[0-9]{10}" maxlength="10" class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="10-digit number" name = "MobileNumber">
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="text-blue-900 font-black flex items-center gap-3 mb-8 uppercase text-sm tracking-widest italic">
+                        <i class="fas fa-map-marker-alt text-orange-500"></i> 2. Location & Fault Details
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Select Ward Area</label>
+                            <select id="l_ward" class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" name = "ward">
+                                <option>Ward No. 01 (Main Market)</option>
+                                <option>Ward No. 02 (Residential North)</option>
+                                <option>Ward No. 03 (School Zone)</option>
+                                <option>Ward No. 04 (Outer Colony)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Electric Pole Number</label>
+                            <input type="text" id="l_pole" class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="e.g. GP-LIT-405" name = "poleNumber">
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Fault Category</label>
+                            <select id="l_problem" class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" name = "Fault">
+                                <option>Light Completely Off</option>
+                                <option>Continuous Flickering</option>
+                                <option>Physical Damage / Broken</option>
+                                <option>Sparking in Junction Box</option>
+                                <option>Day-time Glowing (Sensor Fault)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-black text-gray-400 uppercase mb-2">Emergency Level</label>
+                            <select id="l_priority" class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" name ="EmergencyLevel">
+                                <option>Normal (Routine Repair)</option>
+                                <option>High (Dangerous Wires)</option>
+                                <option>Critical (Complete Darkness)</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block font-black text-gray-400 uppercase mb-2">Landmark / Precise Location</label>
+                            <input type="text" id="l_landmark" required class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="e.g. Opposite Water Tank / Near Post Office" name ="Location">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block font-black text-gray-400 uppercase mb-2">Issue Description (Optional)</label>
+                            <textarea id="l_desc" rows="3" class="glow-border w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-800" placeholder="Mention any specific details..." name = "IssueDescription"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="pt-6">
+                    <button type="submit" class="w-full bg-[#002a5c] text-white py-6 rounded-3xl font-black uppercase tracking-[0.25em] hover:bg-orange-600 hover:shadow-orange-200 transition-all duration-300 shadow-xl text-md flex items-center justify-center gap-3" name = "SBT">
+                        <i class="fas fa-paper-plane"></i> Lodge Official Complaint
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="statusSection" class="hidden">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-200">
+                <div class="bg-gradient-to-r from-green-600 to-emerald-700 p-12 text-white text-center relative">
+                    <div class="absolute top-4 right-8 opacity-20 text-6xl"><i class="fas fa-lightbulb"></i></div>
+                    <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-white/30">
+                        <i class="fas fa-check text-4xl"></i>
+                    </div>
+                    <h2 class="text-4xl font-black uppercase tracking-tighter">Request Logged!</h2>
+                    <p class="font-bold opacity-90 mt-2">Maintenance Ticket: <span id="res_id" class="font-mono bg-black/20 px-3 py-1 rounded"></span></p>
+                </div>
+                
+                <div class="p-10 md:p-16 space-y-10">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="status-card p-8 rounded-3xl border-l-8 border-blue-900">
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Tracking Number</p>
+                            <p class="text-2xl font-mono font-black text-blue-900" id="res_ack"></p>
+                        </div>
+                        <div class="status-card p-8 rounded-3xl border-l-8 border-orange-500 flex flex-col justify-center">
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Current Status</p>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>
+                                <span class="font-black text-orange-600 uppercase text-xs tracking-widest">Technician Dispatched</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100">
+                        <h3 class="text-xs font-black text-blue-900 uppercase mb-8 flex items-center gap-2">
+                            <i class="fas fa-list-alt"></i> Incident Summary
+                        </h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-y-10 text-sm">
+                            <div><p class="text-gray-400 text-[10px] uppercase font-black mb-1">Reported By</p><p id="out_name" class="font-bold text-slate-800"></p></div>
+                            <div><p class="text-gray-400 text-[10px] uppercase font-black mb-1">Pole ID</p><p id="out_pole" class="font-bold text-slate-800"></p></div>
+                            <div><p class="text-gray-400 text-[10px] uppercase font-black mb-1">Location</p><p id="out_ward" class="font-bold text-slate-800"></p></div>
+                            <div><p class="text-gray-400 text-[10px] uppercase font-black mb-1">Fault Type</p><p id="out_problem" class="font-bold text-orange-600"></p></div>
+                            <div><p class="text-gray-400 text-[10px] uppercase font-black mb-1">Landmark</p><p id="out_landmark" class="font-bold text-slate-800"></p></div>
+                            <div><p class="text-gray-400 text-[10px] uppercase font-black mb-1">Phone</p><p id="out_mobile" class="font-bold text-slate-800"></p></div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-5">
+                        <button onclick="window.print()" class="flex-1 bg-slate-900 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-black transition-all shadow-lg">
+                            <i class="fas fa-download mr-2"></i> Save Repair Slip
+                        </button>
+                        <button onclick="location.reload()" class="flex-1 border-2 border-slate-200 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all">
+                            Report Another Issue
+                        </button>
+                    </div>
+
+                    <p class="text-center text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">Standard Resolution Time: 24-48 Working Hours</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-10 text-center text-gray-400 text-[10px] font-bold uppercase tracking-[0.4em]">
+        Official Electrical Maintenance Portal | &copy; 2026 Digital Panchayat
+    </footer>
+
+    <script>
+    document.getElementById('lightForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 1. Ticket ID generate karna
+        const appId = "LIT-" + Math.floor(Math.random() * 90000 + 10000);
+
+        // 2. Form data collect karna
+        const myForm = document.getElementById('lightForm');
+        const formData = new FormData(myForm);
+        formData.append('ticket_id', appId); // Ticket ID bhi bhej rahe hain
+
+        // 3. Database mein bhejna (Fix)
+        fetch('save.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                // Agar data save ho gaya, tabhi success UI dikhao
+                showSuccessUI(appId);
+            } else {
+                alert("Database Error: Data save nahi ho paya!");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Server Error: Check karein ki 'save.php' file maujood hai ya nahi.");
+        });
+    });
+
+    // Aapki original UI switching logic (100% same)
+    function showSuccessUI(appId) {
+        document.getElementById('res_id').innerText = appId;
+        document.getElementById('res_ack').innerText = appId + "-REP-2026";
+        document.getElementById('out_name').innerText = document.getElementById('complainant_name').value;
+        document.getElementById('out_pole').innerText = document.getElementById('l_pole').value || "Not Marked";
+        document.getElementById('out_ward').innerText = document.getElementById('l_ward').value;
+        document.getElementById('out_problem').innerText = document.getElementById('l_problem').value;
+        document.getElementById('out_landmark').innerText = document.getElementById('l_landmark').value;
+        document.getElementById('out_mobile').innerText = document.getElementById('complainant_mobile').value;
+
+        const formSection = document.getElementById('formSection');
+        formSection.style.opacity = '0';
+        formSection.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            formSection.classList.add('hidden');
+            document.getElementById('statusSection').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 400);
+    }
+</script>
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Portal | Gram Panchayat [NAME]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gov-blue { background: #002a5c; }
+        .bg-orange-gov { background: #f97316; }
+        .service-card { transition: all 0.3s ease; border: 1px solid #e2e8f0; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 42, 92, 0.1); border-color: #f97316; }
+        .icon-box { transition: all 0.3s ease; }
+        .service-card:hover .icon-box { background-color: #f97316; color: white; transform: rotate(-10deg); }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div class="bg-gray-100 text-[10px] py-1 px-10 border-b flex justify-between items-center text-gray-600 font-bold uppercase tracking-widest">
+        <div>
+            <span class="mr-4">Government of India</span>
+            <span class="text-blue-800">Ministry of Panchayati Raj</span>
+        </div>
+        <div class="flex gap-4">
+            <span>Sitemap</span> | <span>English/Hindi</span>
+        </div>
+    </div>
+
+    <header class="bg-white py-4 px-10 flex justify-between items-center shadow-md sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="h-14">
+            <div class="border-l-2 border-gray-300 pl-4">
+                <h1 class="text-xl font-black text-blue-900 leading-none uppercase">Gram Panchayat Chincholi</h1>
+                <p class="text-[10px] text-orange-600 font-black uppercase tracking-widest mt-1">District: Jagaon | State: Maharashtra</p>
+            </div>
+        </div>
+        <div class="hidden md:flex gap-8 font-extrabold text-xs text-blue-900 tracking-tighter">
+            <a href="index.html" class="hover:text-orange-500 transition">HOME</a>
+            <a href="about.html" class="hover:text-orange-500 transition">ABOUT US</a>
+            <a href="services.html" class="text-orange-500 border-b-2 border-orange-500">SERVICES</a>
+            <!-- <a href="status.html" class="hover:text-orange-500 transition uppercase">Track Status</a> -->
+        </div>
+    </header>
+
+    <div class="gov-blue text-white py-16 px-10 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h1 class="text-5xl font-black tracking-tighter uppercase mb-4">Citizen Services</h1>
+            <p class="text-blue-100 text-lg max-w-2xl font-light opacity-80">Quickly apply for certificates, utility connections, and register grievances through our unified e-governance portal.</p>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto py-16 px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <div class="service-card bg-white p-8 rounded-[2rem] flex flex-col justify-between">
+                <div>
+                    <div class="icon-box w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-blue-900 mb-3 uppercase tracking-tight">Birth Certificate</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Apply for a new birth certificate or request a duplicate copy. Required for school admissions and identity proof.</p>
+                    <ul class="text-[11px] font-bold text-gray-400 space-y-2 mb-8 uppercase">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Hospital Discharge Paper</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Parents Aadhaar Card</li>
+                    </ul>
+                </div>
+                <a href="birth-registration.html" class="w-full py-4 bg-slate-100 text-blue-900 font-black rounded-xl text-center hover:bg-orange-500 hover:text-white transition uppercase text-xs tracking-widest">Apply Online</a>
+            </div>
+
+            <div class="service-card bg-white p-8 rounded-[2rem] flex flex-col justify-between">
+                <div>
+                    <div class="icon-box w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-faucet"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-blue-900 mb-3 uppercase tracking-tight">Water Connection</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Request a new tap water connection under the Jal Jeevan Mission. Ensure clean drinking water for your household.</p>
+                    <ul class="text-[11px] font-bold text-gray-400 space-y-2 mb-8 uppercase">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Property Ownership Proof</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Latest Tax Receipt</li>
+                    </ul>
+                </div>
+               <a href="water_connection.html"> <button class="w-full py-4 bg-slate-100 text-blue-900 font-black rounded-xl text-center hover:bg-orange-500 hover:text-white transition uppercase text-xs tracking-widest">Request Connection</button></a>
+            </div>
+
+            <div class="service-card bg-white p-8 rounded-[2rem] flex flex-col justify-between">
+                <div>
+                    <div class="icon-box w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-blue-900 mb-3 uppercase tracking-tight">Property Tax</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Assessment of new properties and online payment of annual house/property tax to the Gram Panchayat.</p>
+                    <ul class="text-[11px] font-bold text-gray-400 space-y-2 mb-8 uppercase">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Area Measurement</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Registration Papers</li>
+                    </ul>
+                </div>
+                <a href="Propety_Tax_Assesment.html"><button class="w-full py-4 bg-slate-100 text-blue-900 font-black rounded-xl text-center hover:bg-orange-500 hover:text-white transition uppercase text-xs tracking-widest">Pay / Assess Tax</button></a>
+            </div>
+
+            <div class="service-card bg-white p-8 rounded-[2rem] flex flex-col justify-between">
+                <div>
+                    <div class="icon-box w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-blue-900 mb-3 uppercase tracking-tight">Street Light Repair</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Report non-functional street lights in your ward. Our technical team will resolve the issue within 48 hours.</p>
+                    <ul class="text-[11px] font-bold text-gray-400 space-y-2 mb-8 uppercase">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Pole Number / Location</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Photo of Complaint</li>
+                    </ul>
+                </div>
+                <a href="street_light_repair.html"><button class="w-full py-4 bg-slate-100 text-blue-900 font-black rounded-xl text-center hover:bg-orange-500 hover:text-white transition uppercase text-xs tracking-widest">Report Issue</button></a>
+            </div>
+
+            <div class="service-card bg-white p-8 rounded-[2rem] flex flex-col justify-between">
+                <div>
+                    <div class="icon-box w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-blue-900 mb-3 uppercase tracking-tight">Public Grievance</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Lodge complaints regarding drainage, road quality, or staff behavior. Direct monitoring by the Sarpanch.</p>
+                    <ul class="text-[11px] font-bold text-gray-400 space-y-2 mb-8 uppercase">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Detailed Description</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Contact Details</li>
+                    </ul>
+                </div>
+                <a href="complaint.html"><button class="w-full py-4 bg-slate-100 text-blue-900 font-black rounded-xl text-center hover:bg-orange-500 hover:text-white transition uppercase text-xs tracking-widest">Submit Grievance</button></a>
+            </div>
+
+            <div class="bg-blue-900/5 border-2 border-dashed border-blue-200 p-8 rounded-[2rem] flex flex-col items-center justify-center text-center opacity-60">
+                <i class="fas fa-plus-circle text-4xl text-blue-300 mb-4"></i>
+                <h3 class="text-lg font-bold text-blue-900 uppercase">Upcoming</h3>
+                <p class="text-[10px] text-blue-400 mt-2 font-black uppercase tracking-widest">New Services Coming Soon</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#001a35] text-white pt-16 pb-8 px-10 border-t-4 border-orange-500">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex flex-wrap justify-center gap-12 mb-10 opacity-60 ">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Digital_India_logo.svg/1200px-Digital_India_logo.svg.png" class="h-8" alt="Digital India">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Swachh_Bharat_Abhiyan_logo.svg/1200px-Swachh_Bharat_Abhiyan_logo.svg.png" class="h-8 invert" alt="Swachh Bharat">
+            </div>
+            <p class="text-[10px] font-black tracking-[0.4em] text-gray-500 uppercase">
+                &copy; 2026 Gram Panchayat [NAME] | Government of India Portal
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

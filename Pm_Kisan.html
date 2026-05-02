@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneficiary Search | PM-Kisan Nidhi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: #f0f4f8;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .premium-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .table-head { background: linear-gradient(90deg, #064e3b 0%, #065f46 100%); }
+        
+        tr:hover { background-color: #f0fdf4 !important; }
+
+        /* Modal / PDF Receipt Style */
+        #pdfModal {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .pdf-content {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            border-top: 10px solid #064e3b;
+        }
+
+        @media print {
+            body * { visibility: hidden; }
+            #pdfModal, #pdfModal * { visibility: visible; }
+            #pdfModal { position: absolute; left: 0; top: 0; width: 100%; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b-4 border-green-800 py-5 px-10 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-14">
+            <div>
+                <h1 class="font-[900] text-2xl text-green-900 leading-none tracking-tight">PM-KISAN DASHBOARD</h1>
+                <p class="text-[11px] font-bold text-amber-600 uppercase tracking-[0.2em] mt-1">Village: Chincholi | Beneficiary Data</p>
+            </div>
+        </div>
+        <a href="schemes.html" class="bg-white text-green-900 border-2 border-green-900 px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-green-900 hover:text-white transition-all">
+            <i class="fas fa-arrow-left mr-2"></i> Back
+        </a>
+    </nav>
+
+    <main class="max-w-[1400px] mx-auto pt-12 px-6">
+        
+        <div class="premium-card p-10 rounded-[3rem] mb-12 flex flex-col lg:flex-row justify-between items-center gap-10">
+            <div class="w-full lg:w-1/2">
+                <label class="block text-sm font-black text-green-800 uppercase mb-4 ml-2 tracking-widest">Aadhaar Search (Chincholi Village)</label>
+                <div class="relative">
+                    <i class="fas fa-id-card absolute left-6 top-1/2 -translate-y-1/2 text-green-600 text-xl"></i>
+                    <input type="text" id="aadhaarSearch" onkeyup="filterByAadhaar()" maxlength="14" placeholder="Type Aadhaar Number..." 
+                           class="w-full pl-16 pr-8 py-5 rounded-[2rem] bg-white border-2 border-slate-100 text-xl font-bold outline-none focus:border-green-600 transition-all tracking-widest">
+                </div>
+            </div>
+
+            <div class="flex gap-6 w-full lg:w-auto">
+                <div class="bg-green-100/50 p-6 rounded-3xl border border-green-200 text-center flex-1">
+                    <p class="text-[10px] font-black text-green-700 uppercase">Total Records</p>
+                    <h4 id="recordCount" class="text-3xl font-[900] text-green-900">100</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="premium-card rounded-[3.5rem] overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left" id="kisanTable">
+                    <thead>
+                        <tr class="table-head text-white">
+                            <th class="px-10 py-8 text-sm font-black uppercase tracking-widest">S.No</th>
+                            <th class="px-8 py-8 text-sm font-black uppercase tracking-widest">Farmer Details</th>
+                            <th class="px-8 py-8 text-sm font-black uppercase tracking-widest">Aadhaar Number</th>
+                            <th class="px-8 py-8 text-sm font-black uppercase tracking-widest">Village</th>
+                            <th class="px-8 py-8 text-sm font-black uppercase tracking-widest text-center">Status</th>
+                            <th class="px-8 py-8 text-sm font-black uppercase tracking-widest">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div id="pdfModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="pdf-content rounded-3xl shadow-2xl relative p-10">
+            <button onclick="closeModal()" class="no-print absolute top-5 right-5 text-gray-400 hover:text-red-500 text-2xl">
+                <i class="fas fa-times-circle"></i>
+            </button>
+
+            <div class="text-center border-b pb-6 mb-6">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-16 mx-auto mb-2">
+                <h2 class="text-xl font-black text-green-900 uppercase">Government of India</h2>
+                <p class="text-[10px] font-bold text-gray-500">Pradhan Mantri Kisan Samman Nidhi</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex justify-between">
+                    <span class="text-gray-500 font-bold uppercase text-xs">Application ID:</span>
+                    <span id="pdf_id" class="font-black text-green-800">PMK-2026-9932</span>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">Farmer Name</p>
+                        <p id="pdf_name" class="text-lg font-black text-gray-800"></p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">Village</p>
+                        <p class="text-lg font-black text-gray-800">Chincholi</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-[10px] font-black text-gray-400 uppercase">Aadhaar Number (Linked)</p>
+                    <p id="pdf_aadhaar" class="text-xl font-mono font-black text-green-700"></p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-2xl border border-dashed border-gray-200">
+                    <p class="text-[10px] font-black text-gray-400 uppercase mb-2 text-center">Benefit Status</p>
+                    <p id="pdf_status" class="text-center font-black text-green-600 text-sm uppercase"></p>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t flex flex-col items-center">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=VerifiedFarmer" class="h-20 w-20 opacity-50 mb-4">
+                <p class="text-[9px] text-gray-400 font-bold text-center italic">This is a computer generated digital acknowledgment for Chincholi village records.</p>
+            </div>
+
+            <div class="mt-8 flex gap-4 no-print">
+                <button onclick="window.print()" class="flex-1 bg-green-800 text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest shadow-lg hover:bg-green-700">
+                    <i class="fas fa-download mr-2"></i> Download PDF
+                </button>
+                <button onclick="closeModal()" class="flex-1 bg-gray-100 text-gray-600 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-gray-200">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const firstNames = ["Rajesh", "Om", "Vijay", "Suresh", "Ramesh", "Manoj", "Anil", "Sunil", "Ram", "Deepak", "Pandurang", "Vitthal", "Sopan", "Namdev"];
+        const lastNames = ["Kumar", "Singh", "Yadav", "Verma", "Mishra", "Patel", "Sharma", "Lodhi", "Gaikwad", "Patil", "Deshmukh"];
+        
+        let records = [];
+        const tableBody = document.getElementById('tableBody');
+
+        // Initial 100 Records
+        for (let i = 1; i <= 100; i++) {
+            const fName = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const lName = lastNames[Math.floor(Math.random() * lastNames.length)];
+            const aadhaar = `${Math.floor(1000+Math.random()*9000)}-${Math.floor(1000+Math.random()*9000)}-${Math.floor(1000+Math.random()*9000)}`;
+            
+            records.push({
+                id: i,
+                name: `${fName} ${lName}`,
+                father: `S/O: ${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lName}`,
+                aadhaar: aadhaar,
+                status: Math.random() > 0.1 ? 'Verified & Active' : 'Pending Verification'
+            });
+        }
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                tableBody.innerHTML += `
+                    <tr class="bg-white">
+                        <td class="px-10 py-8 font-black text-slate-300 text-xl">#${item.id}</td>
+                        <td class="px-8 py-8">
+                            <p class="text-xl font-[900] text-slate-800 mb-1">${item.name}</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">${item.father}</p>
+                        </td>
+                        <td class="px-8 py-8 font-mono text-xl font-black text-green-700">${item.aadhaar}</td>
+                        <td class="px-8 py-8 font-black text-green-900 uppercase">Chincholi</td>
+                        <td class="px-8 py-8 text-center">
+                            <span class="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest ${item.status.includes('Active') ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}">
+                                ${item.status}
+                            </span>
+                        </td>
+                        <td class="px-8 py-8">
+                            <button onclick="viewDetail(${item.id})" class="bg-green-50 text-green-800 hover:bg-green-800 hover:text-white w-12 h-12 rounded-2xl transition-all shadow-sm">
+                                <i class="fas fa-file-invoice"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            document.getElementById('recordCount').innerText = data.length;
+        }
+
+        function viewDetail(id) {
+            const farmer = records.find(r => r.id === id);
+            document.getElementById('pdf_name').innerText = farmer.name;
+            document.getElementById('pdf_aadhaar').innerText = farmer.aadhaar;
+            document.getElementById('pdf_status').innerText = farmer.status;
+            document.getElementById('pdf_id').innerText = "PMK-" + (2000 + id) + "-CHI";
+            
+            document.getElementById('pdfModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('pdfModal').classList.add('hidden');
+        }
+
+        function filterByAadhaar() {
+            let val = document.getElementById('aadhaarSearch').value.replace(/-/g, "");
+            const filtered = records.filter(item => item.aadhaar.replace(/-/g, "").includes(val));
+            renderTable(filtered);
+        }
+
+        renderTable(records);
+    </script>
+</body>
+</html>

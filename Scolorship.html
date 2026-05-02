@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Scholarship Portal | Full Application</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Increased global font size and improved styling */
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: #f8fafc; 
+            font-size: 17px; /* Increased from default */
+        }
+        
+        .gov-header { background: white; border-bottom: 4px solid #1e40af; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .glass-card { background: white; border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+        
+        /* Styled Inputs with larger font and better padding */
+        .form-input { 
+            width: 100%; 
+            padding: 14px 22px; 
+            border-radius: 14px; 
+            border: 2px solid #f1f5f9; 
+            outline: none; 
+            font-weight: 600; 
+            transition: all 0.3s; 
+            font-size: 16px; 
+            color: #1e293b;
+        }
+        .form-input:focus { border-color: #1e40af; background: #f0f7ff; box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1); }
+        
+        .file-box { border: 2px dashed #e2e8f0; border-radius: 18px; padding: 15px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .file-box:hover { border-color: #1e40af; background: #f0f7ff; }
+        
+        /* Bold Section Titles */
+        .section-title { 
+            font-size: 14px; 
+            font-weight: 900; 
+            color: #1e40af; 
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            border-bottom: 3px solid #eff6ff; 
+            padding-bottom: 8px; 
+            margin-bottom: 20px; 
+            grid-column: span 2; 
+        }
+
+        label {
+            font-size: 12px !important;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        h2 { font-size: 32px !important; font-weight: 900; }
+        h1 { font-size: 28px !important; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="gov-header py-5 px-6 md:px-10 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-5">
+            <a href="schemes.html"><button onclick="history.back()" class="bg-blue-800 text-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg hover:bg-blue-900 transition-all"><i class="fas fa-arrow-left text-lg"></i></button></a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-14">
+            <div>
+                <h1 class="font-black text-slate-800 tracking-tighter leading-none">STATE <span class="text-blue-800">SCHOLARSHIP</span></h1>
+                <p class="text-[11px] font-bold text-slate-500 uppercase tracking-widest mt-1">Portal v2.0 | National Health Authority Style</p>
+            </div>
+        </div>
+        <div class="bg-blue-50 text-blue-800 px-5 py-2.5 rounded-full text-[11px] font-black border border-blue-100 uppercase tracking-wider">System Status: Live</div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-14 px-6">
+        <div class="grid lg:grid-cols-3 gap-10">
+            
+            <div class="lg:col-span-1 space-y-8">
+                <div class="glass-card p-10 rounded-[3rem] bg-gradient-to-br from-blue-800 to-blue-900 text-white shadow-2xl">
+                    <h3 class="text-xl font-black mb-6 uppercase tracking-tight">Guidelines</h3>
+                    <ul class="space-y-4 text-[14px] font-medium opacity-95">
+                        <li class="flex items-start"><i class="fas fa-info-circle mr-3 mt-1 text-blue-300"></i> All fields marked are mandatory.</li>
+                        <li class="flex items-start"><i class="fas fa-info-circle mr-3 mt-1 text-blue-300"></i> File size for photos: max 500KB.</li>
+                        <li class="flex items-start"><i class="fas fa-info-circle mr-3 mt-1 text-blue-300"></i> Ensure Aadhar is linked to Bank.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="flex gap-5 mb-10 no-print">
+                    <button onclick="showTab('apply')" id="btn-apply" class="flex-1 py-5 rounded-2xl font-black uppercase text-xs tracking-widest bg-blue-800 text-white shadow-xl hover:bg-blue-900 transition-all">Apply Now</button>
+                    <button onclick="showTab('status')" id="btn-status" class="flex-1 py-5 rounded-2xl font-black uppercase text-xs tracking-widest bg-white text-slate-400 border-2 border-slate-100 hover:border-blue-200 transition-all">Track Status</button>
+                </div>
+
+                <div id="tab-apply" class="glass-card p-10 md:p-14 rounded-[3.5rem] shadow-sm">
+                    <form id="scholarshipForm" onsubmit="handleApply(event)" action="save_scholarship.php" method="post" enctype="multipart/form-data">
+                        <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                            
+                            <div class="section-title">Personal & Contact Details</div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Full Name</label>
+                                <input type="text" required id="fName" class="form-input" placeholder="As per Aadhar" name ="fullName">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Email ID</label>
+                                <input type="email" required id="fEmail" class="form-input" placeholder="example@mail.com" name ="email">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Mobile Number</label>
+                                <input type="tel" required id="fPhone" pattern="[0-9]{10}" class="form-input" placeholder="10 Digit Number" name ="phone">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Aadhaar Number</label>
+                                <input type="text" required id="fAadhar" pattern="[0-9]{12}" class="form-input" placeholder="12 Digit UID" name ="aadhar">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Category</label>
+                                <select id="fCategory" class="form-input" name ="category">
+                                    <option>SC</option><option>ST</option><option>OBC</option><option>Minority</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Annual Income</label>
+                                <input type="number" required id="fIncome" class="form-input" placeholder="e.g. 150000" name ="income">
+                            </div>
+
+                            <div class="section-title mt-6">Academic Information</div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Current Course</label>
+                                <input type="text" required id="fCourse" class="form-input" placeholder="e.g. B.Tech" name ="course">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">School/College Name</label>
+                                <input type="text" required id="fCollege" class="form-input" name ="college">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="font-black text-slate-400 uppercase ml-2">University / Board Name</label>
+                                <input type="text" required id="fUni" class="form-input" name ="university">
+                            </div>
+
+                            <div class="section-title mt-6">Previous Class Details</div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Previous Class</label>
+                                <input type="text" required id="fPrevClass" class="form-input" name ="previousClass">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Roll Number</label>
+                                <input type="text" required id="fRoll" class="form-input" name ="rollNumber">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Year of Passing</label>
+                                <input type="number" required id="fYear" class="form-input" placeholder="YYYY" name ="passingYear">
+                            </div>
+                            <div>
+                                <label class="font-black text-slate-400 uppercase ml-2">Marks / Percentage</label>
+                                <input type="text" required id="fMarks" class="form-input" placeholder="e.g. 85%" name ="marks">
+                            </div>
+
+                            <div class="section-title mt-6">Required Documents</div>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:col-span-2">
+                                <div class="file-box">
+                                    <label class="cursor-pointer">
+                                        <i class="fas fa-camera text-purple-600 mb-2 block text-xl"></i>
+                                        <p class="text-[10px] font-black text-slate-600 uppercase">Photograph</p>
+                                        <input type="file" required class="hidden" name ="photo">
+                                    </label>
+                                </div>
+                                <div class="file-box">
+                                    <label class="cursor-pointer">
+                                        <i class="fas fa-pen-nib text-orange-600 mb-2 block text-xl"></i>
+                                        <p class="text-[10px] font-black text-slate-600 uppercase">Signature</p>
+                                        <input type="file" required class="hidden" name ="signature" accept="image/*,application/pdf">
+                                    </label>
+                                </div>
+                                <div class="file-box">
+                                    <label class="cursor-pointer">
+                                        <i class="fas fa-file-pdf text-red-600 mb-2 block text-xl"></i>
+                                        <p class="text-[10px] font-black text-slate-600 uppercase">Bonafide</p>
+                                        <input type="file" required class="hidden" name ="bonafide" accept="image/*,application/pdf">
+                                    </label>
+                                </div>
+                                <div class="file-box">
+                                    <label class="cursor-pointer">
+                                        <i class="fas fa-id-card text-blue-600 mb-2 block text-xl"></i>
+                                        <p class="text-[10px] font-black text-slate-600 uppercase">Caste Cert.</p>
+                                        <input type="file" required class="hidden" name ="casteCert" accept="image/*,application/pdf">
+                                    </label>
+                                </div>
+                                <div class="file-box">
+                                    <label class="cursor-pointer">
+                                        <i class="fas fa-wallet text-green-600 mb-2 block text-xl"></i>
+                                        <p class="text-[10px] font-black text-slate-600 uppercase">Income Cert.</p>
+                                        <input type="file" required class="hidden" name ="incomeCert" accept="image/*,application/pdf">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full mt-12 bg-blue-800 text-white py-6 rounded-3xl font-black uppercase text-sm tracking-[0.2em] shadow-2xl hover:scale-[1.01] active:scale-95 transition-all" name = "submit" >Verify & Submit Application</button>
+                    </form>
+                </div>
+
+                <div id="tab-status" class="hidden glass-card p-14 rounded-[3.5rem] text-center">
+                    <div id="statusContent">
+                        <i class="fas fa-folder-open text-6xl text-slate-100 mb-6"></i>
+                        <p class="font-bold text-slate-400 text-lg">No active scholarship application found.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="successModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/70 backdrop-blur-md">
+        <div class="bg-white p-14 rounded-[4rem] text-center max-w-md border-t-[10px] border-green-500 shadow-2xl">
+            <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8 text-4xl shadow-inner">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 class="text-3xl font-black text-slate-800 mb-3 tracking-tighter">Registration Success!</h3>
+            <p class="text-[15px] font-bold text-slate-500 mb-8 leading-relaxed">Your application has been validated and securely stored in the State database.</p>
+            <div class="bg-slate-50 p-6 rounded-3xl mb-10 border-2 border-slate-100">
+                <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Reference ID</p>
+                <p id="newId" class="text-2xl font-black text-blue-800 tracking-tight"></p>
+            </div>
+            <button onclick="closeModal()" class="w-full bg-blue-800 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-900 transition-all shadow-lg">Track My Application</button>
+        </div>
+    </div>
+
+    <script>
+        function showTab(type) {
+            const btnApply = document.getElementById('btn-apply');
+            const btnStatus = document.getElementById('btn-status');
+            const tabApply = document.getElementById('tab-apply');
+            const tabStatus = document.getElementById('tab-status');
+
+            if(type === 'apply') {
+                tabApply.classList.remove('hidden');
+                tabStatus.classList.add('hidden');
+                btnApply.className = "flex-1 py-5 rounded-2xl font-black uppercase text-xs tracking-widest bg-blue-800 text-white shadow-xl";
+                btnStatus.className = "flex-1 py-5 rounded-2xl font-black uppercase text-xs tracking-widest bg-white text-slate-400 border-2 border-slate-100";
+            } else {
+                tabApply.classList.add('hidden');
+                tabStatus.classList.remove('hidden');
+                btnStatus.className = "flex-1 py-5 rounded-2xl font-black uppercase text-xs tracking-widest bg-blue-800 text-white shadow-xl";
+                btnApply.className = "flex-1 py-5 rounded-2xl font-black uppercase text-xs tracking-widest bg-white text-slate-400 border-2 border-slate-100";
+                renderStatus();
+            }
+        }
+
+        function handleApply(e) {
+            e.preventDefault();
+            const appId = "SCH-GOV-" + Math.floor(100000 + Math.random() * 900000);
+            const application = {
+                id: appId,
+                name: document.getElementById('fName').value,
+                college: document.getElementById('fCollege').value,
+                course: document.getElementById('fCourse').value,
+                marks: document.getElementById('fMarks').value,
+                status: "Pending Verification",
+                date: new Date().toLocaleString()
+            };
+            localStorage.setItem('scholarshipData', JSON.stringify(scholarship_applications));
+            document.getElementById('newId').innerText = appId;
+            document.getElementById('successModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+            showTab('status');
+        }
+
+        function renderStatus() {
+            const data = JSON.parse(localStorage.getItem('scholarshipData'));
+            const container = document.getElementById('statusContent');
+            if(!data) return;
+
+            container.innerHTML = `
+                <div class="text-left space-y-8">
+                    <div class="bg-blue-50 p-8 rounded-[2.5rem] border-2 border-blue-100 flex justify-between items-center">
+                        <div>
+                            <p class="text-[11px] font-black text-blue-800 uppercase tracking-widest">Application ID</p>
+                            <h4 class="text-2xl font-black text-slate-800">${data.id}</h4>
+                        </div>
+                        <span class="bg-amber-100 text-amber-700 px-6 py-2.5 rounded-full text-xs font-black uppercase">${data.status}</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-[2rem] border-2 border-slate-50 shadow-sm">
+                            <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Student Name</p>
+                            <p class="text-lg font-black text-slate-800">${data.name}</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-[2rem] border-2 border-slate-50 shadow-sm">
+                            <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">Current Course</p>
+                            <p class="text-lg font-black text-slate-800">${data.course}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-8 bg-slate-50 rounded-[2.5rem] space-y-5">
+                        <p class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Verification Steps</p>
+                        <div class="flex items-center gap-4 text-green-600 font-bold">
+                            <i class="fas fa-check-circle text-xl"></i>
+                            <span class="text-[15px]">Application Form Submitted</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-slate-300 font-bold">
+                            <i class="far fa-circle text-xl"></i>
+                            <span class="text-[15px]">Institute Level Verification</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-slate-300 font-bold">
+                            <i class="far fa-circle text-xl"></i>
+                            <span class="text-[15px]">Final Fund Disbursement</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleApply(e) {
+        e.preventDefault();
+        
+        const form = document.getElementById('scholarshipForm');
+        const formData = new FormData(form);
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Validating...';
+        submitBtn.disabled = true;
+
+        fetch('save_scholarship.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                // Save to localStorage for the "Track Status" tab to work immediately
+                const application = {
+                    id: data.app_id,
+                    name: data.name,
+                    course: data.course,
+                    status: "Pending Verification",
+                    date: new Date().toLocaleString()
+                };
+                localStorage.setItem('scholarshipData', JSON.stringify(scholarship_applications));
+
+                // Show Success Modal with real Database ID
+                document.getElementById('newId').innerText = data.app_id;
+                document.getElementById('successModal').style.display = 'flex';
+                form.reset();
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Server error. Please check if XAMPP is running.");
+        })
+        .finally(() => {
+            submitBtn.innerHTML = 'Verify & Submit Application';
+            submitBtn.disabled = false;
+        });
+    }
+    </script>
+</body>
+</html>

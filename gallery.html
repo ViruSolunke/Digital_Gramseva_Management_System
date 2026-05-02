@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Gallery | Gram Panchayat Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gov-blue { background-color: #0b3d91; }
+        .gallery-item:hover .overlay { opacity: 1; transform: translateY(0); }
+        .overlay { transition: all 0.4s ease; opacity: 0; transform: translateY(20px); }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans">
+
+    <header class="bg-white border-b-4 border-blue-900 shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" class="h-14">
+                <div>
+                    <h1 class="text-2xl font-black text-blue-900 uppercase">Gram Panchayat Gallery</h1>
+                    <p class="text-xs font-bold text-orange-600 italic">Visualizing Progress & Transformation</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-6 font-bold text-sm text-blue-900">
+                <a href="index.html" class="hover:text-orange-600">HOME</a>
+                <a href="services.html" class="hover:text-orange-600">SERVICES</a>
+                <a href="schemes.html" class="hover:text-orange-600">SCHEMES</a>
+                <a href="gallery.html" class="text-orange-600 border-b-2 border-orange-600">GALLERY</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-6">
+        
+        <div class="bg-blue-900 rounded-2xl p-8 mb-12 text-white flex flex-col md:flex-row justify-between items-center shadow-xl">
+            <div class="mb-4 md:mb-0">
+                <h2 class="text-3xl font-bold mb-2 underline decoration-orange-400">Development Showcase 2025-2026</h2>
+                <p class="text-blue-100 italic">Transperancy through images: Tracking the physical progress of village projects.</p>
+            </div>
+            <div class="flex gap-4">
+                <div class="text-center bg-blue-800 p-4 rounded-xl border border-blue-700">
+                    <span class="block text-2xl font-bold">12+</span>
+                    <span class="text-xs uppercase">Projects Completed</span>
+                </div>
+                <div class="text-center bg-blue-800 p-4 rounded-xl border border-blue-700">
+                    <span class="block text-2xl font-bold">₹45L+</span>
+                    <span class="text-xs uppercase">Funds Utilized</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg bg-white border">
+                <img src="uploads\concret.jpg?auto=format&fit=crop&w=600" class="w-full h-64 object-cover">
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-1 rounded uppercase">Infrastructure</span>
+                        <span class="text-gray-400 text-xs italic">Completed: Oct 2025</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">New Concrete Internal Roads</h3>
+                    <p class="text-sm text-gray-600 mt-2">Construction of 2.5km RCC roads in Ward No. 3 and 4 to ensure dust-free and all-weather connectivity.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg bg-white border">
+                <img src="uploads\smartclass.jpg?auto=format&fit=crop&w=600" class="w-full h-64 object-cover">
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-1 rounded uppercase">Education</span>
+                        <span class="text-gray-400 text-xs italic">Completed: Jan 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Smart Classroom Setup</h3>
+                    <p class="text-sm text-gray-600 mt-2">Installation of digital projectors and high-speed internet in the Primary Zilla Parishad School.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg bg-white border">
+                <img src="uploads\solar-street-light.jpg?auto=format&fit=crop&w=600" class="w-full h-64 object-cover">
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="bg-yellow-100 text-yellow-800 text-[10px] font-bold px-2 py-1 rounded uppercase">Energy</span>
+                        <span class="text-gray-400 text-xs italic">Ongoing</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Village Solar Street Lights</h3>
+                    <p class="text-sm text-gray-600 mt-2">150+ solar-powered LED lights installed at main intersections to reduce electricity bills and carbon footprint.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg bg-white border">
+                <img src="uploads\watertank.jpg?auto=format&fit=crop&w=600" class="w-full h-64 object-cover">
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="bg-cyan-100 text-cyan-800 text-[10px] font-bold px-2 py-1 rounded uppercase">Health</span>
+                        <span class="text-gray-400 text-xs italic">Completed: Aug 2025</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Community Water Tank</h3>
+                    <p class="text-sm text-gray-600 mt-2">New 50,000-liter overhead tank to provide 24/7 tap water connection to every household under Jal Jeevan Mission.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg bg-white border">
+                <img src="uploads\Modern_Seed_Bank.jpg?auto=format&fit=crop&w=600" class="w-full h-64 object-cover">
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded uppercase">Agriculture</span>
+                        <span class="text-gray-400 text-xs italic">Completed: Nov 2025</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Modern Seed Bank</h3>
+                    <p class="text-sm text-gray-600 mt-2">Facility established for farmers to store and exchange high-yield seeds and organic fertilizers.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item relative overflow-hidden rounded-2xl shadow-lg bg-white border">
+                <img src="uploads\geamFrontimg.jpg?auto=format&fit=crop&w=600" class="w-full h-64 object-cover">
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="bg-orange-100 text-orange-800 text-[10px] font-bold px-2 py-1 rounded uppercase">Community</span>
+                        <span class="text-gray-400 text-xs italic">Ongoing</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Panchayat Bhawan Renovation</h3>
+                    <p class="text-sm text-gray-600 mt-2">Upgrading the main village office with computer labs and a meeting hall for Gram Sabha gatherings.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-blue-900 text-white py-12 mt-12 border-t-4 border-orange-500">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="font-bold text-lg mb-2 uppercase">Official Gram Panchayat Development Record</p>
+            <p class="text-sm text-blue-200">For more details on budgets and expenditure, please visit the Online Services -> Audit Section.</p>
+            <p class="mt-6 opacity-40 text-xs">&copy; 2026 Gram Panchayat [Name]. Built for Digital India.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

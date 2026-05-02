@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gram Panchayat Official Portal | Digital Village</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gov-gradient { background: linear-gradient(90deg, #022a5e 0%, #0b5ed7 100%); }
+        .hero-pattern { background-color: #f8fafc; background-image: url("https://www.transparenttextures.com/patterns/cubes.png"); }
+        .service-card:hover { transform: translateY(-5px); transition: 0.3s; }
+        .section-title { border-left: 6px solid #f97316; padding-left: 15px; margin-bottom: 30px; }
+        html { scroll-behavior: smooth; }
+        /* Animation for Notice Board */
+        .notice-scroll { animation: scroll-up 15s linear infinite; }
+        @keyframes scroll-up { 0% { transform: translateY(100%); } 100% { transform: translateY(-100%); } }
+        
+        /* Profile Styling (Only addition) */
+        #userArea { display: flex; align-items: center; gap: 10px; }
+        .user-logo { width: 35px; height: 35px; background: #f97316; border-radius: 50%; display: flex; items-center: center; justify-content: center; font-weight: 900; border: 2px solid white; color: white; }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans leading-normal tracking-normal">
+
+    <div class="bg-gray-100 text-xs py-1 px-10 border-b flex justify-between items-center text-gray-600">
+        <div>
+            <span class="mr-4">Govt. of India</span>
+            <span class="font-bold text-blue-800">Ministry of Panchayati Raj</span>
+        </div>
+        <div class="flex gap-4">
+            <a href="#" class="hover:text-blue-600">Sitemap</a> | 
+            <a href="#" class="hover:text-blue-600">Screen Reader Access</a> |
+            <div class="flex gap-1 border-l pl-4">
+                <button class="bg-white border px-1 font-bold">A-</button>
+                <button class="bg-white border px-1 font-bold">A</button>
+                <button class="bg-white border px-1 font-bold">A+</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-white py-4 px-10 flex flex-wrap justify-between items-center shadow-md sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="h-16">
+            <div class="border-l-2 border-gray-300 pl-4">
+                <h1 class="text-2xl font-black text-blue-900 leading-none">ग्राम पंचायत चिंचोली</h1>
+                <h2 class="text-lg font-bold text-gray-700 uppercase">Gram Panchayat Chincholi</h2>
+                <p class="text-xs text-orange-600 font-bold italic tracking-tighter">District: Jagaon | State: Maharashtra</p>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <img src="digital_india.png" class="h-12 opacity-100" alt="Digital India">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Swachh_Bharat_Mission_Logo.svg" class="h-12" alt="Swachh Bharat">
+        </div>
+    </header>
+
+    <nav class="gov-gradient text-white shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between">
+            <div class="flex items-center">
+                <a href="#" class="px-6 py-4 hover:bg-blue-800 font-bold flex items-center gap-2 border-r border-blue-700">
+                    <i class="fas fa-home"></i> HOME
+                </a>
+               <a href="about.html" class="px-6 py-4 hover:bg-blue-800 font-bold border-r border-blue-700 protected-link">ABOUT PANCHAYAT</a>
+<a href="services.html" class="px-6 py-4 hover:bg-blue-800 font-bold border-r border-blue-700 protected-link">ONLINE SERVICES</a>
+<a href="schemes.html" class="px-6 py-4 hover:bg-blue-800 font-bold border-r border-blue-700 protected-link">SCHEMES</a>
+<a href="gallery.html" class="px-6 py-4 hover:bg-blue-800 font-bold protected-link">GALLERY</a>
+<a href="dashboard.html" class="px-6 py-4 hover:bg-blue-800 font-bold border-r border-blue-700 protected-link">Application Status</a>
+            </div>
+
+            <div class="flex items-center gap-4 px-6">
+                <a href="logIn.html" id="loginBtn" class="bg-orange-600 text-white px-6 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-black transition-all">
+                    Citizen Login
+                </a>
+
+                <div id="userProfile" class="hidden flex items-center gap-3 bg-slate-100 p-1 pr-4 rounded-full border border-slate-200 shadow-sm">
+                    <div id="userCircle" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black text-lg border-2 border-white shadow-sm">
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[9px] font-black text-slate-400 uppercase leading-none">Verified User</p>
+                        <p id="userNameDisplay" class="text-xs font-black text-slate-800 uppercase leading-tight">Guest</p>
+                    </div>
+                    <button onclick="logout()" class="ml-2 text-slate-400 hover:text-red-600 transition-colors">
+                        <i class="fas fa-power-off text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="min-h-screen">
+        
+        <div class="relative bg-gray-900 text-white h-[450px] flex items-center overflow-hidden">
+            <img src="uploads\geamFrontimg.jpg?auto=format&fit=crop&w=1500&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60">
+            <div class="relative z-10 px-12 max-w-4xl">
+                <h2 class="text-5xl font-extrabold mb-4 border-l-8 border-orange-500 pl-6">Digital Empowerment for Every Villager</h2>
+                <p class="text-xl mb-8 text-gray-200">The official portal of Gram Panchayat [Name]. Apply for certificates, track projects, and connect with your representatives online.</p>
+                <div class="flex gap-4">
+                    <a href="services.html" class="protected-btn"><button  class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-bold text-lg shadow-xl transition">Apply for Certificates</button></a>
+                    <a href="Development-Report.html" class="protected-btn"><button class="bg-white text-blue-900 px-8 py-3 rounded-lg font-bold text-lg shadow-xl hover:bg-gray-100 transition">View Development Report</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto -mt-10 relative z-20 grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+            <div class="bg-white p-6 rounded-xl shadow-xl border-b-4 border-blue-600 text-center service-card">
+                <i class="fas fa-users text-blue-600 text-3xl mb-2"></i>
+                <h4 class="text-2xl font-black">4,371</h4>
+                <p class="text-gray-500 text-sm font-bold">Total Population</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-xl border-b-4 border-green-600 text-center service-card">
+                <i class="fas fa-university text-green-600 text-3xl mb-2"></i>
+                <h4 class="text-2xl font-black">78%</h4>
+                <p class="text-gray-500 text-sm font-bold">Literacy Rate</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-xl border-b-4 border-orange-600 text-center service-card">
+                <i class="fas fa-faucet text-orange-600 text-3xl mb-2"></i>
+                <h4 class="text-2xl font-black">100%</h4>
+                <p class="text-gray-500 text-sm font-bold">Water Connection</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-xl border-b-4 border-red-600 text-center service-card">
+                <i class="fas fa-bolt text-red-600 text-3xl mb-2"></i>
+                <h4 class="text-2xl font-black">24x7</h4>
+                <p class="text-gray-500 text-sm font-bold">Electricity Supply</p>
+            </div>
+        </div>
+
+        <section class="max-w-7xl mx-auto py-16 px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-blue-900 underline underline-offset-8">Quick Citizen Services</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <a href="birth-registration.html"class="protected-box">
+                  <div class="bg-white p-6 rounded-lg shadow hover:bg-blue-50 cursor-pointer text-center service-card border">
+                    <i class="fas fa-file-invoice text-4xl text-blue-700 mb-4"></i>
+                    <p class="font-bold text-sm">Birth Certificate</p>
+                </div>
+                </a>
+                <a href="Propety-Tax-Assesment.html"class="protected-box">
+                    <div class="bg-white p-6 rounded-lg shadow hover:bg-blue-50 cursor-pointer text-center service-card border">
+                    <i class="fas fa-home text-4xl text-blue-700 mb-4"></i>
+                    <p class="font-bold text-sm">Property Tax</p>
+                </div>
+                </a>
+                <a href="lightBill.html"class="protected-box">
+                  <div class="bg-white p-6 rounded-lg shadow hover:bg-blue-50 cursor-pointer text-center service-card border">
+                    <i class="fas fa-lightbulb text-4xl text-blue-700 mb-4"></i>
+                    <p class="font-bold text-sm">Light Bill</p>
+                </div>
+                </a>
+                <a href="complaint.html"class="protected-box">
+                  <div class="bg-white p-6 rounded-lg shadow hover:bg-blue-50 cursor-pointer text-center service-card border">
+                    <i class="fas fa-exclamation-triangle text-4xl text-blue-700 mb-4"></i>
+                    <p class="font-bold text-sm">Complaints</p>
+                </div>
+                </a>
+                <a href="Farmer.html"class="protected-box">
+                    <div class="bg-white p-6 rounded-lg shadow hover:bg-blue-50 cursor-pointer text-center service-card border">
+                    <i class="fas fa-tractor text-4xl text-blue-700 mb-4"></i>
+                    <p class="font-bold text-sm">Farmer Portal</p>
+                </div>
+                </a>
+                <a href="voterList.html"class="protected-box">
+                    <div class="bg-white p-6 rounded-lg shadow hover:bg-blue-50 cursor-pointer text-center service-card border">
+                    <i class="fas fa-id-card text-4xl text-blue-700 mb-4"></i>
+                    <p class="font-bold text-sm">Voter List</p>
+                </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="py-16 bg-slate-100 px-10 border-t">
+            <div class="max-w-7xl mx-auto">
+                <h3 class="text-3xl font-black text-blue-900 section-title uppercase">Development Projects</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-blue-600">
+                        <h4 class="font-bold text-xl mb-3">Concrete Road Network</h4>
+                        <p class="text-sm text-gray-600 mb-4">Connecting all wards with 5km of new weather-proof internal roads.</p>
+                        <div class="bg-blue-100 text-blue-800 text-[10px] font-bold px-3 py-1 rounded-full w-fit">80% PROGRESS</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-green-600">
+                        <h4 class="font-bold text-xl mb-3">Clean Drinking Water</h4>
+                        <p class="text-sm text-gray-600 mb-4">New RO purification plant installation for Ward 2 and Ward 4.</p>
+                        <div class="bg-green-100 text-green-800 text-[10px] font-bold px-3 py-1 rounded-full w-fit">COMPLETED</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-orange-600">
+                        <h4 class="font-bold text-xl mb-3">Solar Grid System</h4>
+                        <p class="text-sm text-gray-600 mb-4">Implementation of 150 solar lights in common village areas.</p>
+                        <div class="bg-orange-100 text-orange-800 text-[10px] font-bold px-3 py-1 rounded-full w-fit">IN PLANNING</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-white px-10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <h3 class="text-3xl font-black text-green-800 section-title uppercase" style="border-left-color: #16a34a;">Farmer Assistance Center</h3>
+                    <p class="text-gray-700 mb-6 font-medium">Providing essential resources and digital updates to the farming community of our village.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-green-50 rounded-xl border border-green-100">
+                            <i class="fas fa-seedling text-green-600 mb-2"></i>
+                            <p class="font-bold text-sm">Seed Subsidy</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-xl border border-green-100">
+                            <i class="fas fa-tint text-green-600 mb-2"></i>
+                            <p class="font-bold text-sm">Drip Irrigation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 bg-green-900 rounded-3xl p-8 text-white shadow-2xl">
+                    <h4 class="text-xl font-bold mb-4 italic">Latest Mandi Rates</h4>
+                    <div class="space-y-3 opacity-90 text-sm">
+                        <div class="flex justify-between border-b border-green-700 pb-2"><span>Wheat (Gehun)</span> <span>₹2,450 / Quintal</span></div>
+                        <div class="flex justify-between border-b border-green-700 pb-2"><span>Rice (Chawal)</span> <span>₹3,100 / Quintal</span></div>
+                        <div class="flex justify-between"><span>Soybean</span> <span>₹4,200 / Quintal</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-slate-50 px-10">
+            <div class="max-w-7xl mx-auto">
+                <h3 class="text-3xl font-black text-red-900 section-title uppercase" style="border-left-color: #dc2626;">Health & Wellness Center</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border flex items-center gap-6">
+                        <i class="fas fa-hospital-user text-5xl text-red-500"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Primary Health PHC</h4>
+                            <p class="text-sm text-gray-500">Regular Checkups: 10 AM - 4 PM</p>
+                            <p class="text-xs text-blue-600 font-bold mt-1 uppercase">Available: Mon, Wed, Fri</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border flex items-center gap-6">
+                        <i class="fas fa-ambulance text-5xl text-blue-600"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Emergency Ambulance</h4>
+                            <p class="text-sm text-gray-500 text-2xl font-black">Call: 108</p>
+                            <p class="text-xs text-gray-400">Stationed at Panchayat Bhawan 24/7</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-white px-10">
+            <div class="max-w-7xl mx-auto">
+                <h3 class="text-3xl font-black text-orange-900 section-title uppercase" style="border-left-color: #f97316;">Social Welfare Schemes</h3>
+                <div class="grid md:grid-cols-1 gap-4">
+                    <div class="flex justify-between items-center p-6 bg-orange-50 rounded-2xl border-l-8 border-orange-500">
+                        <p class="font-bold text-lg">Pradhan Mantri Awas Yojana (Housing)</p>
+                        <span class="bg-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold">45 New Allotments</span>
+                    </div>
+                    <div class="flex justify-between items-center p-6 bg-blue-50 rounded-2xl border-l-8 border-blue-500">
+                        <p class="font-bold text-lg">Old Age Pension Scheme</p>
+                        <span class="bg-blue-500 text-white px-4 py-1 rounded-full text-xs font-bold">Monthly Disbursement Active</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-slate-100 px-10 border-t border-gray-200">
+            <div class="max-w-7xl mx-auto">
+                <h3 class="text-3xl font-black text-blue-900 section-title uppercase">Panchayat Officials Details</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center border-t-4 border-orange-500 service-card">
+    <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-orange-100">
+        <img 
+            src="uploads/sarpanch.jpg" 
+            alt="Sarpanch" 
+            class="w-full h-full object-cover rounded-full"
+        >
+    </div>
+    <h4 class="font-bold text-lg leading-tight">Sarpanch Name</h4>
+    <p class="text-orange-600 text-[10px] font-bold uppercase tracking-widest mb-2">Sumitra Anil Solunke</p>
+    <p class="text-xs text-gray-500 font-bold border-t pt-2 mt-2">
+        <i class="fas fa-phone mr-1"></i> +91 88XXX XXXXX
+    </p>
+</div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center border-t-4 border-blue-600 service-card">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gray-400"></i>
+                        </div>
+                        <h4 class="font-bold text-lg leading-tight">Gram Sevak</h4>
+                        <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-2">ulhas Khushal Patil</p>
+                        <p class="text-xs text-gray-500 font-bold border-t pt-2 mt-2"><i class="fas fa-phone mr-1"></i> +91 75XXX XXXXX</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center border-t-4 border-green-600 service-card">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gray-400"></i>
+                        </div>
+                        <h4 class="font-bold text-lg leading-tight">Up-Sarpanch</h4>
+                        <p class="text-green-600 text-[10px] font-bold uppercase tracking-widest mb-2">Dy. Village Head</p>
+                        <p class="text-xs text-gray-500 font-bold border-t pt-2 mt-2"><i class="fas fa-phone mr-1"></i> +91 97XXX XXXXX</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center border-t-4 border-red-600 service-card">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <i class="fas fa-user-shield text-3xl text-gray-400"></i>
+                        </div>
+                        <h4 class="font-bold text-lg leading-tight">Talathi</h4>
+                        <p class="text-red-600 text-[10px] font-bold uppercase tracking-widest mb-2">Nyaneshwar Namdev koli</p>
+                        <p class="text-xs text-gray-500 font-bold border-t pt-2 mt-2"><i class="fas fa-phone mr-1"></i> +91 96XXX XXXXX</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-white px-10">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-black text-blue-900 section-title uppercase">Notice Board</h3>
+                    <div class="bg-blue-900 h-64 rounded-2xl shadow-inner overflow-hidden relative border-4 border-gray-800">
+                        <div class="bg-red-600 text-white text-[10px] font-bold px-3 py-1 absolute top-0 left-0 z-10 uppercase">Live Announcements</div>
+                        <div class="p-6 text-white space-y-4 notice-scroll">
+                            <p class="border-b border-blue-700 pb-2 text-sm">📅 Gram Sabha Meeting scheduled for 26th Jan.</p>
+                            <p class="border-b border-blue-700 pb-2 text-sm">💧 Water supply maintenance in Ward 4 tomorrow.</p>
+                            <p class="border-b border-blue-700 pb-2 text-sm">📝 New Voter List registration started at office.</p>
+                            <p class="border-b border-blue-700 pb-2 text-sm">🌾 Seed distribution camp for Kharif season starts Friday.</p>
+                            <p class="text-sm">🏠 PM Awas Yojana list updated - Check at Office.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black text-blue-900 section-title uppercase">Panchayat Funds</h3>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-gray-200">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
+                                <span class="text-xs font-bold text-gray-600">15th Finance Commission</span>
+                                <span class="text-sm font-black text-green-600">₹45,20,000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
+                                <span class="text-xs font-bold text-gray-600">State Finance Fund</span>
+                                <span class="text-sm font-black text-blue-600">₹12,40,000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm">
+                                <span class="text-xs font-bold text-gray-600">Own Revenue (Tax)</span>
+                                <span class="text-sm font-black text-orange-600">₹3,15,000</span>
+                            </div>
+                        </div>
+                        <button class="mt-4 w-full text-[10px] font-bold text-blue-800 uppercase tracking-tighter hover:underline">View Detailed Audit Report <i class="fas fa-external-link-alt ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-slate-50 px-10 border-t border-gray-200">
+            <div class="max-w-7xl mx-auto">
+                <h3 class="text-3xl font-black text-blue-900 section-title uppercase text-center mb-10">Village Information</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <i class="fas fa-map-marked-alt text-3xl text-blue-600 mb-4"></i>
+                        <h4 class="font-bold mb-2">Geography</h4>
+                        <p class="text-xs text-gray-500">Total Area: 1200 Hectares. Divided into 7 Administrative Wards.</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-history text-3xl text-orange-600 mb-4"></i>
+                        <h4 class="font-bold mb-2">History</h4>
+                        <p class="text-xs text-gray-500">Founded in 1952. Best Village Award recipient in 2022.</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-phone-alt text-3xl text-green-600 mb-4"></i>
+                        <h4 class="font-bold mb-2">Helpline</h4>
+                        <p class="text-xs text-gray-500 font-bold">Panchayat Helpdesk: 02XXX-2XXXXX<br>Email: help@grampanchayat.in</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white pt-12 pb-6 px-10">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 border-b border-gray-700 pb-10">
+            <div class="col-span-1">
+                <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+                <p class="text-sm text-gray-400 leading-loose">Gram Panchayat Office,<br>Main Village Square,<br>District Name - 400XXX</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Useful Links</h3>
+                <ul class="text-sm text-gray-400 space-y-2">
+                    <li><a href="#" class="hover:text-white">State Govt Portal</a></li>
+                    <li><a href="#" class="hover:text-white">Central Govt Portal</a></li>
+                    <li><a href="#" class="hover:text-white">E-Gram Swaraj</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Citizen Charter</h3>
+                <p class="text-sm text-gray-400">View our commitment to service delivery timelines and transparency protocols.</p>
+            </div>
+            <div>
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Digital_India_logo.svg/1200px-Digital_India_logo.svg.png" class="h-20 mb-4 invert" alt="">
+            </div>
+        </div>
+        <div class="text-center mt-6 text-xs text-gray-500">
+            &copy; 2026 Gram Panchayat [NAME]. Content Managed by Gram Panchayat Administration.
+        </div>
+    </footer>
+
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+    // Already logged in user ka check
+    const savedName = sessionStorage.getItem('userName');
+
+    // Navbar ke protected links
+    const protectedLinks = document.querySelectorAll('.protected-link');
+
+    protectedLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!savedName) {
+                e.preventDefault(); // page open hone se rok do
+                alert("Please login first!");
+                window.location.href = "logIn.html"; // login page pe bhejo
+            }
+            // Agar login ho chuka hai, normal navigation
+        });
+    });
+});
+
+     const protectedBoxes = document.querySelectorAll('.protected-box');
+
+protectedBoxes.forEach(box => {
+    box.addEventListener('click', function(e) {
+        const savedName = sessionStorage.getItem('userName');
+        if (!savedName) {
+            e.preventDefault(); // page open hone se rok do
+            alert("Please login first to access this service!");
+            // Save the clicked page for redirect after login
+            sessionStorage.setItem('redirectAfterLogin', box.getAttribute('href'));
+            window.location.href = "logIn.html";
+        }
+        // Agar login ho chuka hai → normal navigation
+    });
+});
+   
+    const protectedBtns = document.querySelectorAll('.protected-btn');
+
+protectedBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const savedName = sessionStorage.getItem('userName');
+        if (!savedName) {
+            e.preventDefault(); // page open hone se rok do
+            alert("Please login first to access this service!");
+            // Save the clicked page for redirect after login
+            sessionStorage.setItem('redirectAfterLogin', btn.getAttribute('href'));
+            window.location.href = "logIn.html";
+        }
+        // Agar login ho chuka hai → normal navigation
+    });
+});
+    document.addEventListener('DOMContentLoaded', function() {
+        // Session se user ka naam uthao
+        const savedName = sessionStorage.getItem('userName');
+        
+        const loginBtn = document.getElementById('loginBtn');
+        const userProfile = document.getElementById('userProfile');
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        const userCircle = document.getElementById('userCircle');
+
+        if (savedName) {
+            // 1. Login button chhupao
+            loginBtn.classList.add('hidden');
+            
+            // 2. Profile section dikhao
+            userProfile.classList.remove('hidden');
+            
+            // 3. Naam aur Logo (Initial) set karo
+            userNameDisplay.innerText = savedName;
+            userCircle.innerText = savedName.charAt(0).toUpperCase();
+        }
+    });
+
+    // Logout function
+    function logout() {
+        sessionStorage.clear(); // Sab clear karo
+        window.location.reload(); // Page reload hote hi wapas Login button aa jayega
+    }
+    </script>
+</body>
+</html>
